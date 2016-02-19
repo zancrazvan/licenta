@@ -9,4 +9,27 @@
 
 	<context:component-scan base-package="com.licenta.controller" />
 
+	<mvc:annotation-driven>
+		<mvc:path-matching suffix-pattern="false"
+			trailing-slash="true" registered-suffixes-only="false" />
+	</mvc:annotation-driven>
+
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/defs/general.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="order" value="2" />
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+	</bean>
+
 </beans>

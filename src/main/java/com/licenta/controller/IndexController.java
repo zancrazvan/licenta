@@ -10,7 +10,7 @@ public class IndexController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index() {
 
-		return "/WEB-INF/jsp/index.jsp";
+		return "index";
 	}
 
 }
