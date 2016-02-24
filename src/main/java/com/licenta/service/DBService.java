@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.licenta.service;
 
 import javax.annotation.PostConstruct;
