@@ -77,7 +77,7 @@
 								<li>
 									<!-- start message --> <a href="#">
 										<div class="pull-left">
-											<img src="dist/img/user2-160x160.jpg" class="img-circle"
+											<img src="resources/dist/img/user2-160x160.jpg" class="img-circle"
 												alt="User Image">
 										</div>
 										<h4>
@@ -90,7 +90,7 @@
 								<!-- end message -->
 								<li><a href="#">
 										<div class="pull-left">
-											<img src="dist/img/user3-128x128.jpg" class="img-circle"
+											<img src="resources/dist/img/user3-128x128.jpg" class="img-circle"
 												alt="User Image">
 										</div>
 										<h4>
@@ -101,7 +101,7 @@
 								</a></li>
 								<li><a href="#">
 										<div class="pull-left">
-											<img src="dist/img/user4-128x128.jpg" class="img-circle"
+											<img src="resources/dist/img/user4-128x128.jpg" class="img-circle"
 												alt="User Image">
 										</div>
 										<h4>
@@ -111,7 +111,7 @@
 								</a></li>
 								<li><a href="#">
 										<div class="pull-left">
-											<img src="dist/img/user3-128x128.jpg" class="img-circle"
+											<img src="resources/dist/img/user3-128x128.jpg" class="img-circle"
 												alt="User Image">
 										</div>
 										<h4>
@@ -122,7 +122,7 @@
 								</a></li>
 								<li><a href="#">
 										<div class="pull-left">
-											<img src="dist/img/user4-128x128.jpg" class="img-circle"
+											<img src="resources/dist/img/user4-128x128.jpg" class="img-circle"
 												alt="User Image">
 										</div>
 										<h4>
@@ -241,13 +241,13 @@
 				<!-- User Account: style can be found in dropdown.less -->
 				<li class="dropdown user user-menu"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown"> <img
-						src="dist/img/user2-160x160.jpg" class="user-image"
+						src="resources/dist/img/user2-160x160.jpg" class="user-image"
 						alt="User Image"> <span class="hidden-xs">Alexander
 							Pierce</span>
 				</a>
 					<ul class="dropdown-menu">
 						<!-- User image -->
-						<li class="user-header"><img src="dist/img/user2-160x160.jpg"
+						<li class="user-header"><img src="resources/dist/img/user2-160x160.jpg"
 							class="img-circle" alt="User Image">
 							<p>
 								Alexander Pierce - Web Developer <small>Member since
@@ -285,7 +285,7 @@
 		<section class="sidebar"> <!-- Sidebar user panel -->
 		<div class="user-panel">
 			<div class="pull-left image">
-				<img src="dist/img/user2-160x160.jpg" class="img-circle"
+				<img src="resources/dist/img/user2-160x160.jpg" class="img-circle"
 					alt="User Image">
 			</div>
 			<div class="pull-left info">
