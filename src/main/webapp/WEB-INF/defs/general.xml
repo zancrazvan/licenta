@@ -11,5 +11,9 @@
 	<definition name="index" extends="common">
 		<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
 	</definition>
+	
+	<definition name="chart-example" extends="common">
+		<put-attribute name="body" value="/WEB-INF/jsp/chart-example.jsp" />
+	</definition>
 
 </tiles-definitions>
