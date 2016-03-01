@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.licenta.service;
 
 import javax.annotation.PostConstruct;
@@ -13,7 +14,7 @@ import com.licenta.repository.UserRepository;
 @Transactional
 public class DBService {
 
-	/*@Autowired
+	@Autowired
 	private UserRepository userRepository;
 
 	@PostConstruct
@@ -25,5 +26,5 @@ public class DBService {
 
 		userRepository.save(user);
 
-	}*/
+	}
 }
