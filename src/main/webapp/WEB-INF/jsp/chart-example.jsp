@@ -9,12 +9,12 @@
 	href="${pageContext.request.contextPath}/resources/angular/resources/angular-chart.css">
 </head>
 <body ng-controller="TestController">
-	<div class="col-md-3"></div>
-	<div class="col-md-6">
+<!-- 	<div class="col-md-3"></div>
+	<div class="col-md-6"> -->
 		<canvas id="line" class="chart chart-line" chart-data="data"
 			chart-labels="labels" chart-legend="true" chart-series="series"
 			chart-click="onClick"> </canvas>
-	</div>
+	<!-- </div> -->
 
 </body>
 <script

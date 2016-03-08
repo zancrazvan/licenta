@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.licenta.component.FileParser;
 import com.licenta.mockObject.DeviceMock;
 
@@ -25,8 +24,8 @@ public class TestController {
 
 	@RequestMapping("get-demo-data")
 	public @ResponseBody DeviceMock getDemoData() {
-		return fileParser
-				.readFile("E:/STS/GitRepo/licenta/src/main/webapp/csvData/Freezer/device_4BA15B_2012.01.12_cleaned_12.01.2012.csv");
+		return fileParser.readFile(
+				"A:/Facultate/SD/DS2015_30642_Zanc_Razvan/Licenta/src/main/webapp/csvData/Freezer/device_4BA15B_2012.01.12_cleaned_12.01.2012.csv");
 
 	}
 
