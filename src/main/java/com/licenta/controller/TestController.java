@@ -26,7 +26,7 @@ public class TestController {
 	@RequestMapping("get-demo-data")
 	public @ResponseBody DeviceMock getDemoData() {
 		return fileParser
-				.readFile("E:/STS/GitRepo/licenta/src/main/webapp/csvData/Freezer/device_4BA15B_2012.01.12_cleaned_12.01.2012.csv");
+				.readFile("csvData/Freezer/device_4BA15B_2012.01.12_cleaned_12.01.2012.csv");
 
 	}
 
