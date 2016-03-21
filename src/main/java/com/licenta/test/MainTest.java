@@ -13,7 +13,7 @@ import com.licenta.mockObject.DeviceMock;
 
 public class MainTest {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 
 		FileParser fileParser = new FileParser();
 		DeviceMock d = fileParser
@@ -38,7 +38,7 @@ public class MainTest {
 		 * .dense(point));
 		 */
 
-		JavaRDD<String> data = sc.textFile(inputFile);
+		/*JavaRDD<String> data = sc.textFile(inputFile);
 		JavaRDD<Vector> points = data.map(new Function<String, Vector>() {
 			public Vector call(String s) {
 				String[] sarray = s.split(" ");
@@ -57,11 +57,12 @@ public class MainTest {
 		for (Vector center : model.clusterCenters()) {
 			System.out.println(" " + center);
 		}
+		 
 		double cost = model.computeCost(points.rdd());
 		System.out.println("Cost: " + cost);
 
 		sc.stop();
 
-	}
+	}*/
 
 }
