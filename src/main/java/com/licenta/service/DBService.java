@@ -18,12 +18,12 @@ public class DBService {
 
 	@PostConstruct
 	public void init() {
-
+/*
 		User user = new User();
 		user.setId(1);
 		user.setName("Nume");
 
-		userRepository.save(user);
+		userRepository.save(user);*/
 
 	}
 
