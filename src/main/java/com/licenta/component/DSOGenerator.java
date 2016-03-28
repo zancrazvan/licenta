@@ -7,7 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.licenta.mockObject.DeviceMock;
@@ -15,6 +18,9 @@ import com.licenta.mockObject.TimeSeriesBit;
 
 @Component
 public class DSOGenerator {
+
+	@Autowired
+	private Randomizer randomizer;
 
 	public DeviceMock generate(int min) {
 		Date d = new Date();
@@ -64,4 +70,76 @@ public class DSOGenerator {
 			// report
 		}
 	}
+
+	public Map<Date, Float> generateDSOCsv(int minConsumption, int max) {
+
+		Map<Date, Float> device = new TreeMap<Date, Float>();
+		Date d = new Date();
+
+		d.setHours(0);
+		d.setSeconds(0);
+		float current = 0;
+		for (int i = 0; i < 60 * 60 * 24; i++) {
+
+			if (i % 12000 == 0) {
+
+				current = minConsumption
+						+ randomizer.generate(minConsumption, max);
+			}
+			if (i % 12000 < 9000) {
+				device.put(d, current);
+			} else {
+				device.put(d, .0f);
+			}
+			System.out.println(device.get(d));
+			d.setSeconds(d.getSeconds() + 1);
+
+		}
+
+		return device;
+
+	}
+
+	public void generateDSOCsv(String filename, int minConsumption, int max) {
+
+		File file = new File(filename);
+		try {
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			FileWriter fileWritter = new FileWriter(file.getName(), false);
+			BufferedWriter writer = new BufferedWriter(fileWritter);
+
+			Date d = new Date();
+
+			d.setHours(0);
+			d.setSeconds(0);
+			float current = 0;
+			float val;
+			for (int i = 0; i < 60 * 60 * 24; i++) {
+				if (i % 12000 == 0) {
+
+					current = minConsumption
+							+ randomizer.generate(minConsumption, max);
+					
+				}
+				if (i % 12000 < 9000) {
+					val = current;
+				} else {
+					val = 100;
+				}
+			 
+				
+				writer.write(d.toGMTString() + "," + val);
+				d.setSeconds(d.getSeconds() + 1);
+				writer.write("\r\n");
+
+			}
+
+			writer.close();
+		} catch (IOException ex) {
+			// report
+		}
+	}
+
 }
