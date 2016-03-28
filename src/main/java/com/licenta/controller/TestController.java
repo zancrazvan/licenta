@@ -22,7 +22,7 @@ public class TestController {
 		return "chart-example";
 	}
 
-	@RequestMapping("get-demo-data")
+	@RequestMapping("/get-demo-data")
 	public @ResponseBody DeviceMock getDemoData() {
 		System.out.println(System.getProperty("user.dir"));
 		return fileParser
