@@ -1,9 +1,12 @@
 package com.licenta.component;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,8 +37,8 @@ public class FileParser {
 		String cvsSplitBy = ";";
 
 		try {
-
-			br = new BufferedReader(new FileReader(csvFile));
+			FileInputStream fis = new FileInputStream(new File(csvFile));
+			br = new BufferedReader(new InputStreamReader(fis));
 			while ((line = br.readLine()) != null) {
 
 				// use semicolon as separator

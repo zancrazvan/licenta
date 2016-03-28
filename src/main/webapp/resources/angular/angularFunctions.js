@@ -15,8 +15,8 @@
 					var labels = [];
 					var values = [];
 					for (i = 0; i < 50; i++) {
-
-						labels[i] = curba[i*100].date.split(" ")[3];
+						var date= new Date(curba[i*100].date);
+						labels[i] = date.toString();
 						values[i] = curba[i*100].value;
 					}
 					console.log(labels);
