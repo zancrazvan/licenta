@@ -24,9 +24,9 @@ public class TestController {
 
 	@RequestMapping("get-demo-data")
 	public @ResponseBody DeviceMock getDemoData() {
-
-		return fileParser.readFile(
-				"A:/Facultate/SD/DS2015_30642_Zanc_Razvan/Licenta/src/main/webapp/csvData/Freezer/device_4BA15B_2012.01.12_cleaned_12.01.2012.csv");
+		System.out.println(System.getProperty("user.dir"));
+		return fileParser
+				.readFile(System.getProperty("user.dir")+"/src/main/resources/csvData/Freezer/device_4BA15B_2012.01.12_cleaned_12.01.2012.csv");
 
 	}
 
