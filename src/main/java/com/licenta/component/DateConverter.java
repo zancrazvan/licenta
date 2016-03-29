@@ -20,7 +20,7 @@ public class DateConverter {
 
 			return date;
 		} catch (ParseException e) {
-			formatter = new SimpleDateFormat("dd/MM/yyyy");
+			formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 			try {
 				Date date = formatter.parse(dateInString);
 				return date;

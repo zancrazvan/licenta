@@ -13,9 +13,8 @@ import com.licenta.mockObject.Device;
 import com.licenta.mockObject.DeviceMock;
 import com.licenta.mockObject.TimeSeriesBit;
 
- 
 public class FileParser {
- 
+
 	private DateConverter dateConverter = new DateConverter();
 
 	public DeviceMock readFile(String file) {
@@ -33,16 +32,17 @@ public class FileParser {
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {
 
-				// use semicolon as separator
-				String[] values = line.split(cvsSplitBy);
+				if (!line.contains("sep")) {
+					String[] values = line.split(cvsSplitBy);
 
-				TimeSeriesBit bt = new TimeSeriesBit();
-				bt.setDate(dateConverter.convert(values[0]));
-				bt.setValue(Integer.parseInt(values[1]));
-				bits.add(bt);
+					TimeSeriesBit bt = new TimeSeriesBit();
+					bt.setDate(dateConverter.convert(values[0]));
+					bt.setValue(Integer.parseInt(values[1]));
+					bits.add(bt);
 
-				curba.put(dateConverter.convert(values[0]),
-						Integer.parseInt(values[1]));
+					curba.put(dateConverter.convert(values[0]),
+							Integer.parseInt(values[1]));
+				}
 
 			}
 
@@ -60,7 +60,6 @@ public class FileParser {
 			}
 		}
 
-		System.out.println("Done");
 		device.setCurba(curba);
 		dev.setCurba(bits);
 		return dev;

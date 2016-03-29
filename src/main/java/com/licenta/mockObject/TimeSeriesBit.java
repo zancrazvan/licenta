@@ -1,8 +1,9 @@
 package com.licenta.mockObject;
 
+import java.security.Timestamp;
 import java.util.Date;
 
-public class TimeSeriesBit {
+public class TimeSeriesBit implements Comparable<TimeSeriesBit> {
 
 	private Date date;
 	private int value;
@@ -17,5 +18,10 @@ public class TimeSeriesBit {
 	}
 	public void setValue(int value) {
 		this.value = value;
+	}
+	@Override
+	public int compareTo(TimeSeriesBit o) {
+		 
+		return this.getDate().compareTo(o.getDate());
 	}
 }
