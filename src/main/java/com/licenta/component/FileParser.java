@@ -45,7 +45,7 @@ public class FileParser {
 					String[] values = line.split(cvsSplitBy);
 
 					TimeSeriesBit bt = new TimeSeriesBit();
-					System.out.println(values[0]);
+					// System.out.println(values[0]);
 					bt.setDate(dateConverter.convert(values[0]));
 					bt.setValue(Integer.parseInt(values[1]));
 					bits.add(bt);
@@ -70,7 +70,59 @@ public class FileParser {
 			}
 		}
 
-		System.out.println("Done");
+		// System.out.println("Done");
+		device.setCurba(curba);
+		dev.setCurba(bits);
+		return dev;
+	}
+
+	public DeviceMock readFileThin(String file) {
+		Device device = new Device();
+		Map<Date, Integer> curba = new TreeMap<Date, Integer>();
+		DeviceMock dev = new DeviceMock();
+		ArrayList<TimeSeriesBit> bits = new ArrayList<TimeSeriesBit>();
+		String csvFile = file;
+		BufferedReader br = null;
+		String line = "";
+		String cvsSplitBy = ";";
+		int counter = 0;
+		try {
+			FileInputStream fis = new FileInputStream(new File(csvFile));
+			br = new BufferedReader(new InputStreamReader(fis));
+			while ((line = br.readLine()) != null) {
+				counter++;
+				if (counter % 100 == 0) {
+					if (!line.contains("sep")) {
+						String[] values = line.split(cvsSplitBy);
+
+						TimeSeriesBit bt = new TimeSeriesBit();
+						// System.out.println(values[0]);
+						bt.setDate(dateConverter.convert(values[0]));
+						bt.setValue(Integer.parseInt(values[1]));
+						bits.add(bt);
+
+						curba.put(dateConverter.convert(values[0]),
+								Integer.parseInt(values[1]));
+					}
+				}
+
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// System.out.println("Done");
 		device.setCurba(curba);
 		dev.setCurba(bits);
 		return dev;

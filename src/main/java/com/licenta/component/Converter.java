@@ -36,7 +36,7 @@ public class Converter {
 				if (rising(window)) {
 					deviceRunning = true;
 					start = train.get(i).getDate();
-					System.out.print(a.getName()+": "+start + "      ");
+					//System.out.print(a.getName()+": "+start + "      ");
 				}
 			} else {
 				if (falling(window)) {
@@ -44,11 +44,11 @@ public class Converter {
 					end = train.get(i).getDate();
 					
 					try {
-						System.out.println(end + "     pwr: " + (power / count));
+						//System.out.println(end + "     pwr: " + (power / count));
 						a.setRunningTime((int) ((end.getTime() - start.getTime()) / 60000));
 						a.setPutere(power / count);
 					} catch (Exception e) {
-						System.out.println(end + "     pwr: 0" );
+						//System.out.println(end + "     pwr: 0" );
 						a.setRunningTime((int) ((end.getTime() - start.getTime()) / 60000));
 						a.setPutere(0);
 					}
@@ -72,8 +72,8 @@ public class Converter {
 		a.setAlways(true);
 		a.setPutere(power / train.size());
 		a.setName(deviceName);
-		System.out.println(a.getName()+": device runns constantly(power: " + a.getPutere()
-				+ ")");
+		/*System.out.println(a.getName()+": device runns constantly(power: " + a.getPutere()
+				+ ")");*/
 		return a;
 	}
 

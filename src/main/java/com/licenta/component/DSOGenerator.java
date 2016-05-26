@@ -121,15 +121,14 @@ public class DSOGenerator {
 
 					current = minConsumption
 							+ randomizer.generate(minConsumption, max);
-					
+
 				}
 				if (i % 12000 < 9000) {
 					val = current;
 				} else {
 					val = 100;
 				}
-			 
-				
+
 				writer.write(d.toGMTString() + "," + val);
 				d.setSeconds(d.getSeconds() + 1);
 				writer.write("\r\n");
@@ -140,6 +139,38 @@ public class DSOGenerator {
 		} catch (IOException ex) {
 			// report
 		}
+	}
+
+	public DeviceMock getConsumptionPattern(int noOfFeatures, int minPwr,
+			int maxPwr) {
+		DeviceMock device = new DeviceMock();
+
+		List<TimeSeriesBit> train = new ArrayList<TimeSeriesBit>();
+		Date d = new Date();
+		d.setHours(0);
+		d.setMinutes(0);
+		d.setSeconds(1);
+		int val;
+		int currentPwr = randomizer.generate(minPwr, maxPwr);
+		for (int i = 0; i < 24 * 60 * 60; i++) {
+			if (i % 12000 == 0) {
+
+				currentPwr = randomizer.generate(minPwr, maxPwr);
+
+			}
+			if (i % 12000 < 9000) {
+				val = currentPwr;
+			} else {
+				val = 0;
+			}
+			TimeSeriesBit t = new TimeSeriesBit();
+			t.setDate(d);
+			t.setValue(val);
+			train.add(t);
+
+		}
+		device.setCurba(train);
+		return device;
 	}
 
 }

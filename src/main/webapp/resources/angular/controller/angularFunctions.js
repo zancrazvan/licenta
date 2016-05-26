@@ -44,20 +44,4 @@
 	});
 })();
 
-function callAtRegister() {
-	console.log("callReg");
-	window.location = '/buddies';
-}
-
-function goGoogle(number, gen) {
-	if (number === "000")
-		console.log(number + gen + " lalala");
-	else
-		console.log(gen + " lalala");
-	// window.location='www.google.com';
-}
-
-function goEvents(name) {
-	console.log("mergem la eveniment: " + name);
-	window.location = '/events/' + name;
-}
+ 

@@ -1,4 +1,4 @@
-package com.licenta.test;
+package com.licenta.component;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,72 +8,19 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.licenta.component.Converter;
 import com.licenta.document.Aparat;
 import com.licenta.mockObject.DeviceMock;
+import com.licenta.service.MockObjectService;
 
- 
-public class ListFilesUtil {
- 
-	FileParser f;
-	 
-	Converter c;
+@Component
+public class FolderCrawler {
+	@Autowired
+	private FileParser f;
+	@Autowired
+	private Converter c;
+	@Autowired
+	private MockObjectService mockObjectService;
 
-	/**
-	 * List all the files and folders from a directory
-	 * 
-	 * @param directoryName
-	 *            to be listed
-	 */
-	public void listFilesAndFolders(String directoryName) {
-		File directory = new File(directoryName);
-		// get all the files from a directory
-		File[] fList = directory.listFiles();
-		for (File file : fList) {
-			System.out.println(file.getName());
-		}
-	}
-
-	/**
-	 * List all the files under a directory
-	 * 
-	 * @param directoryName
-	 *            to be listed
-	 */
-	public void listFiles(String directoryName) {
-		File directory = new File(directoryName);
-		// get all the files from a directory
-		File[] fList = directory.listFiles();
-		for (File file : fList) {
-			if (file.isFile()) {
-				System.out.println(file.getName());
-			}
-		}
-	}
-
-	/**
-	 * List all the folder under a directory
-	 * 
-	 * @param directoryName
-	 *            to be listed
-	 */
-	public void listFolders(String directoryName) {
-		File directory = new File(directoryName);
-		// get all the files from a directory
-		File[] fList = directory.listFiles();
-		for (File file : fList) {
-			if (file.isDirectory()) {
-				System.out.println(file.getName());
-			}
-		}
-	}
-
-	/**
-	 * List all files from a directory and its subdirectories
-	 * 
-	 * @param directoryName
-	 *            to be listed
-	 */
 	public void listFilesAndFilesSubDirectories(String directoryName) {
 		File directory = new File(directoryName);
 
@@ -119,12 +66,31 @@ public class ListFilesUtil {
 		for (File file : fList) {
 			if (file.isFile()) {
 				DeviceMock m = f.readFile(file.getAbsolutePath());
-				String p = file.getParent();
-				String some[] = p.split(Pattern.quote("\\"));
 
 				aparate.add(m);
 			} else if (file.isDirectory()) {
-				listFilesAndFilesSubDirectories(file.getAbsolutePath());
+				findAllDevices(file.getAbsolutePath());
+			}
+		}
+
+		return aparate;
+	}
+
+	public List<DeviceMock> findAllDevicesThin(String directoryName) {
+		System.out.println("in there");
+		File directory = new File(directoryName);
+		List<DeviceMock> aparate = new ArrayList<DeviceMock>();
+
+		File[] fList = directory.listFiles();
+		for (File file : fList) {
+			if (file.isFile()) {
+				DeviceMock m = mockObjectService.thin(f.readFileThin(file
+						.getAbsolutePath()));
+				System.out.println(file.getName());
+				aparate.add(m);
+				return aparate;
+			} else if (file.isDirectory()) {
+				aparate.addAll(findAllDevicesThin(file.getAbsolutePath()));
 			}
 		}
 

@@ -15,5 +15,9 @@
 	<definition name="chart-example" extends="common">
 		<put-attribute name="body" value="/WEB-INF/jsp/chart-example.jsp" />
 	</definition>
+	
+	<definition name="allCharts" extends="common">
+		<put-attribute name="body" value="/WEB-INF/jsp/allCharts.jsp" />
+	</definition>
 
 </tiles-definitions>

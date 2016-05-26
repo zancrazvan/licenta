@@ -1,0 +1,3 @@
+pca principal component analisis
+lda - 
+implementate in weka
