@@ -19,17 +19,12 @@ public class DBServiceGhita {
 	@Autowired
 	private DSOGenerator dsoGen;
 	
-	@Autowired
-	private UserRepository userRepository;
+	 
 	
 	@PostConstruct
 	public void init() {
 		 
-		User user = new User();
-		user.setId(1);
-		user.setName("Nume");
-
-		userRepository.save(user);
+		
 	}
 
  

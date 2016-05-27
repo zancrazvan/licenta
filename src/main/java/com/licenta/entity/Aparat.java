@@ -1,5 +1,7 @@
 package com.licenta.entity;
 
+ 
+import org.hibernate.annotations.Entity;
 import org.springframework.data.annotation.Id;
 
 @Entity
