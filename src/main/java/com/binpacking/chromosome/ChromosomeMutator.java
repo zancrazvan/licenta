@@ -39,8 +39,8 @@ public class ChromosomeMutator {
 			for (Bin bin : toRemove) {
 
 				elements.addAll(bin.getElements());
+				bin.getElements().clear();
 			}
-			chromosome.getBins().removeAll(toRemove);
 
 			ChromosomeDAO.addFreeItems(elements, chromosome);
 

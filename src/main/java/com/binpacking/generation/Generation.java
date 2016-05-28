@@ -44,7 +44,7 @@ public class Generation {
 
 					string = string + (int) element.getValue() + " ";
 				}
-				string = string + "]";
+				string = string /*+ ":" + (int) bin.getCapacity()*/ + "]";
 			}
 
 			string = string + "<--- END CHROMOSOM";
