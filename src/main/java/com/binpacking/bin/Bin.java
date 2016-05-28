@@ -9,7 +9,7 @@ public class Bin {
 
 	private int id;
 
-	private double capacity = 150;
+	private double capacity;
 
 	private List<Element> elements = new ArrayList<>();
 

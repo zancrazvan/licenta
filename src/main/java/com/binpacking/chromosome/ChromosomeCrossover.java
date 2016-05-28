@@ -14,34 +14,22 @@ public class ChromosomeCrossover {
 			Point pointChromosome1 = ChromosomeDAO.computeCrossoverPoints(2, chromosome1);
 			Point pointChromosome2 = ChromosomeDAO.computeCrossoverPoints(2, chromosome2);
 
-			/*
-			 * System.out.println("PONT CHR 1 " + pointChromosome1.getY() +
-			 * " POINT CHR 2 " + pointChromosome2.getX());
-			 * 
-			 * System.out.println("CROSSOVER INTRE: " + chromosome1.toString() +
-			 * " SI " + chromosome2.toString());
-			 */
-
 			if (pointChromosome1 != null && pointChromosome2 != null) {
 
-				List<Bin> bins1 = ChromosomeDAO.genBinsByDivision(chromosome1, pointChromosome1);
-				List<Bin> bins2 = ChromosomeDAO.genBinsByDivision(chromosome2, pointChromosome2);
+				int crossoverPoint = ChromosomeDAO.getCrossoverPoint(chromosome1);
 
-				ChromosomeDAO.insertBinsOnPos(bins2, chromosome1, pointChromosome1.getY());
-				ChromosomeDAO.insertBinsOnPos(bins1, chromosome2, pointChromosome2.getX());
+				System.out.println("CROSS INTRE: " + chromosome1.toString() + " SI " + chromosome2.toString()
+						+ " LA POINT: " + crossoverPoint);
+				List<Bin> bins1 = ChromosomeDAO.genBinsByDivision1(chromosome1, crossoverPoint);
+				List<Bin> bins2 = ChromosomeDAO.genBinsByDivision2(chromosome2, crossoverPoint);
 
-				ChromosomeDAO.deleteDuplicatesByBins(bins2, chromosome1);
-				// System.out.println("---");
-				ChromosomeDAO.deleteDuplicatesByBins(bins1, chromosome2);
+				ChromosomeDAO.insertBinsOnPos2(bins2, chromosome1, crossoverPoint);
+				ChromosomeDAO.insertBinsOnPos1(bins1, chromosome2, crossoverPoint);
+
+				//ChromosomeDAO.deleteDuplicatesByBins(bins2, chromosome1);
+				//ChromosomeDAO.deleteDuplicatesByBins(bins1, chromosome2);
 			}
 
-			// System.out.println("DUPA CROSSOVER: " + chromosome1.toString() +
-			// " SI " + chromosome2.toString());
-
-			/*
-			 * ChromosomeDAO.addFreeItems(chromosome1);
-			 * ChromosomeDAO.addFreeItems(chromosome2);
-			 */
 		}
 	}
 
