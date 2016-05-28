@@ -14,7 +14,7 @@ import com.knapsack.GeneticAlgorithm;
 import com.knapsack.SwitchingTime;
 import com.knapsack.SwitchingTimeGenerator;
 
-public class Main {
+public class Main2 {
 
 	public static void main(String[] args) {
 

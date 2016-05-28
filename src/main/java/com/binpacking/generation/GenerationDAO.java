@@ -11,6 +11,7 @@ import com.binpacking.chromosome.ChromosomeDAO;
 import com.binpacking.chromosome.ChromosomeFitness;
 import com.binpacking.chromosome.ChromosomeMutator;
 import com.binpacking.element.Element;
+import com.binpacking.util.DSOCurveGenerator;
 import com.binpacking.util.Randomizer;
 
 public class GenerationDAO {
@@ -22,30 +23,19 @@ public class GenerationDAO {
 		for (int i = 0; i < size; i++) {
 
 			List<Bin> bins = new ArrayList<>();
+			bins = DSOCurveGenerator.generateBinCurve();
 
-			Bin bin = new Bin();
-			bin.setCapacity(10);
-			Bin bin2 = new Bin();
-			bin2.setCapacity(10);
-			Bin bin3 = new Bin();
-			bin3.setCapacity(10);
-			Bin bin4 = new Bin();
-			bin4.setCapacity(10);
-			Bin bin5 = new Bin();
-			bin5.setCapacity(10);
-			Bin bin6 = new Bin();
-			bin6.setCapacity(10);
-			Bin bin7 = new Bin();
-			bin7.setCapacity(10);
-
-			bins.add(bin);
-			bins.add(bin2);
-			bins.add(bin3);
-			bins.add(bin4);
-			bins.add(bin5);
-			bins.add(bin6);
-			//bins.add(bin7);
-
+			System.out.println("HEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEEEEEE");
+			/*
+			 * Bin bin = new Bin(); bin.setCapacity(10); Bin bin2 = new Bin();
+			 * bin2.setCapacity(10); Bin bin3 = new Bin(); bin3.setCapacity(10);
+			 * Bin bin4 = new Bin(); bin4.setCapacity(10); Bin bin5 = new Bin();
+			 * bin5.setCapacity(10); Bin bin6 = new Bin(); bin6.setCapacity(10);
+			 * Bin bin7 = new Bin(); bin7.setCapacity(10);
+			 * 
+			 * bins.add(bin); bins.add(bin2); bins.add(bin3); bins.add(bin4);
+			 * bins.add(bin5); bins.add(bin6); //bins.add(bin7);
+			 */
 			Chromosome chromosome = new Chromosome();
 			chromosome.setBins(bins);
 			ChromosomeDAO.insertRandom(elements, chromosome);
@@ -56,7 +46,7 @@ public class GenerationDAO {
 
 		return generation;
 
-	}
+	} 
 
 	public static Generation selection(Generation generation) {
 
