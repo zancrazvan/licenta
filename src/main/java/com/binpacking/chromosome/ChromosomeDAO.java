@@ -27,7 +27,7 @@ public class ChromosomeDAO {
 	private static void firstFitElement(List<Element> elements, Chromosome chromosome) {
 
 		if (chromosome.getBins().size() == 0) {
-			chromosome.getBins().add(new Bin());
+			System.out.println("SIZE 0");
 		}
 
 		for (Element element : elements) {
@@ -40,18 +40,16 @@ public class ChromosomeDAO {
 				elements2.add(element);
 				test.setElements(elements2);
 
-				if ((BinDAO.getFilled(test) <= bin.getCapacity() - BinDAO.getFilled(bin)) && added == false) {
+				if ((BinDAO.getFilled(test) <= bin.getCapacity() - BinDAO.getFilled(bin)) && added == false
+						&& !(contains(chromosome.getBins(), element))) {
 
 					bin.getElements().add(element);
 					added = true;
+
 				}
 
 			}
 			if (added == false) {
-
-				Bin bin = new Bin();
-				bin.getElements().add(element);
-				chromosome.getBins().add(bin);
 			}
 
 		}
@@ -82,10 +80,14 @@ public class ChromosomeDAO {
 
 	}
 
-	public static List<Bin> genBinsByDivision(Chromosome chromosome, Point point) {
+	public static int getCrossoverPoint(Chromosome chromosome) {
+		return Randomizer.generate(1, chromosome.getBins().size() - 1);
+	}
+
+	public static List<Bin> genBinsByDivision1(Chromosome chromosome, int point) {
 
 		List<Bin> bins = new ArrayList<>();
-		for (int i = point.getX(); i < point.getY(); i++) {
+		for (int i = 0; i < point; i++) {
 
 			bins.add(chromosome.getBins().get(i));
 		}
@@ -94,14 +96,83 @@ public class ChromosomeDAO {
 
 	}
 
-	public static void insertBinsOnPos(List<Bin> bins, Chromosome chromosome, int y) {
+	public static List<Bin> genBinsByDivision2(Chromosome chromosome, int point) {
 
-		if (y >= chromosome.getBins().size()) {
-			y = chromosome.getBins().size();
+		List<Bin> bins = new ArrayList<>();
+		for (int i = point; i < chromosome.getBins().size(); i++) {
+
+			bins.add(chromosome.getBins().get(i));
 		}
-		chromosome.getBins().addAll(y, bins);
 
-		// System.out.println("adaugate binuri " + chromosome.toString());
+		return bins;
+
+	}
+
+	public static void insertBinsOnPos1(List<Bin> bins, Chromosome chromosome, int point) {
+
+		List<Bin> toRemove = new ArrayList<>();
+		List<Element> elements = new ArrayList<>();
+		for (int i = 0; i < point; i++) {
+
+			toRemove.add(chromosome.getBins().get(i));
+			elements.addAll(chromosome.getBins().get(i).getElements());
+		}
+		chromosome.getBins().removeAll(toRemove);
+		chromosome.getBins().addAll(0, bins);
+
+		for (Bin bin : chromosome.getBins()) {
+			for (Bin bin2 : bins) {
+
+				if (!bin.equals(bin2)) {
+
+					for (Element element : bin.getElements()) {
+						if (!elements.contains(element)) {
+
+							elements.add(element);
+						}
+					}
+
+				}
+
+			}
+			bin.getElements().clear();
+		}
+
+		ChromosomeDAO.addFreeItems(elements, chromosome);
+
+	}
+
+	public static void insertBinsOnPos2(List<Bin> bins, Chromosome chromosome, int point) {
+
+		List<Bin> toRemove = new ArrayList<>();
+		List<Element> elements = new ArrayList<>();
+		for (int i = point; i < chromosome.getBins().size(); i++) {
+
+			toRemove.add(chromosome.getBins().get(i));
+			elements.addAll(chromosome.getBins().get(i).getElements());
+		}
+		chromosome.getBins().removeAll(toRemove);
+		chromosome.getBins().addAll(chromosome.getBins().size(), bins);
+
+		for (Bin bin : chromosome.getBins()) {
+			for (Bin bin2 : bins) {
+
+				if (!bin.equals(bin2)) {
+
+					for (Element element : bin.getElements()) {
+						if (!elements.contains(element)) {
+
+							elements.add(element);
+						}
+					}
+
+				}
+
+			}
+			bin.getElements().clear();
+		}
+
+		ChromosomeDAO.addFreeItems(elements, chromosome);
 	}
 
 	public static void deleteDuplicatesByBins(List<Bin> bins, Chromosome chromosome) {
@@ -150,12 +221,15 @@ public class ChromosomeDAO {
 
 	}
 
-	public static boolean contains(List<Element> elements, Element element) {
+	public static boolean contains(List<Bin> bins, Element element) {
 
-		for (Element element2 : elements) {
-			if (element2.getId() == element.getId() && element2.getValue() == element.getValue()) {
+		for (Bin bin : bins) {
 
-				return true;
+			for (Element element2 : bin.getElements()) {
+				if (element2.getId() == element.getId() && element2.getValue() == element.getValue()) {
+
+					return true;
+				}
 			}
 		}
 		return false;
