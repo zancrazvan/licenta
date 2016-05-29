@@ -38,7 +38,7 @@ public class GeneticAlgorithm {
 		// generate initial population
 		List<Chromosome> population = generateInitialPopulation(populationSize,
 				chromosomeSize, switchingTimes);
-
+		int initialError = 0;
 		for (int gens = 0; gens < maxGenerations; gens++) {
 
 			List<Chromosome> offspring = new ArrayList<Chromosome>();
@@ -53,7 +53,7 @@ public class GeneticAlgorithm {
 			List<Chromosome> crossovers = crossover(population);
 			double mutationP = ununiformMutation(gens,
 					GeneticAlgorithm.mutationProbability, GeneticAlgorithm.beta);
-			 
+
 			// System.out.println(mutationP);
 			population = new ArrayList<Chromosome>();
 			population.addAll(crossovers);
@@ -72,10 +72,20 @@ public class GeneticAlgorithm {
 			 * return best; }
 			 */
 
-			System.out.println(gens + ","
-					+ (int) (generetionFitness(population) / populationSize));
-		}
+			if (gens == 0) {
+				initialError = population.get(0).getAbsoluteError();
+			}
 
+			int fitness = (int) (generetionFitness(population) / populationSize);
+			double mappedFitness = Range.mapRange(0, initialError, 1, 0,
+					population.get(0).getAbsoluteError());
+			System.out.println(gens + "," + mappedFitness+","+population.get(0).getAbsoluteError());
+		}
+		
+		System.out.println(population.get(0).getAbsoluteError()
+				+ "   and mapped: "
+				+ Range.mapRange(0, initialError, 1, 0, population.get(0)
+						.getAbsoluteError()));
 		Collections.sort(population);
 		return population.get(0);
 	}

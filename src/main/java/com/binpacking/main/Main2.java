@@ -16,7 +16,7 @@ import com.knapsack.SwitchingTimeGenerator;
 
 public class Main2 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		// int elements[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
@@ -31,7 +31,7 @@ public class Main2 {
 			int runsInBins = switchingTime.getRunningTime();
 
 			for (int j = 0; j < runsInBins; j++) {
-				System.out.println("MATAAAA");
+				 
 				Element element = new Element();
 				element.setId(k);
 				element.setValue(device.getPower());
@@ -56,17 +56,18 @@ public class Main2 {
 		Generation generation = GenerationDAO.initializeFirstGeneration(list, 100);
 		System.out.println(generation.getPopulation().size() + " " + generation.toString());
 
-		for (int i = 1; i <= 100; i++) {
+		for (int i = 1; i <= 20; i++) {
 
 			generation.setId(i);
 			generation = GenerationDAO.selection(generation);
 			generation = GenerationDAO.generateNextGeneration(generation);
-			System.out.println("AICI");
-			System.out.println("BAAAAAA");
+			 
 			generation = GenerationDAO.mutate(generation);
-
-			System.out.println(generation.getPopulation().size() + " " + generation.toString());
+ 
+			
 		}
+		System.out.println(generation.getPopulation().size() + " , " + generation.toString());
+		System.out.println("gata");
 
 	}
 

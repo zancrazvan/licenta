@@ -24,4 +24,10 @@ public class TimeSeriesBit implements Comparable<TimeSeriesBit> {
 		 
 		return this.getDate().compareTo(o.getDate());
 	}
+	@Override
+	public String toString() {
+		return "TimeSeriesBit [date=" + date + ", value=" + value + "]";
+	}
+	
+	
 }

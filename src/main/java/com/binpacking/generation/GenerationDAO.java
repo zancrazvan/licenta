@@ -25,7 +25,7 @@ public class GenerationDAO {
 			List<Bin> bins = new ArrayList<>();
 			bins = DSOCurveGenerator.generateBinCurve();
 
-			System.out.println("HEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEEEEEE");
+			 
 			/*
 			 * Bin bin = new Bin(); bin.setCapacity(10); Bin bin2 = new Bin();
 			 * bin2.setCapacity(10); Bin bin3 = new Bin(); bin3.setCapacity(10);

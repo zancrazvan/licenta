@@ -5,6 +5,9 @@ public class Device {
 	private int id;
 	private int power;
 	private boolean alwaysOn;
+	
+	private String name;
+	
 
 	public Device() {
 		// TODO Auto-generated constructor stub
@@ -38,6 +41,14 @@ public class Device {
 
 	public void setAlwaysOn(boolean alwaysOn) {
 		this.alwaysOn = alwaysOn;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
