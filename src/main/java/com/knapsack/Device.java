@@ -1,13 +1,12 @@
 package com.knapsack;
 
-public class Device {
+public class Device implements Comparable<Device> {
 
 	private int id;
 	private int power;
 	private boolean alwaysOn;
-	
+
 	private String name;
-	
 
 	public Device() {
 		// TODO Auto-generated constructor stub
@@ -49,6 +48,13 @@ public class Device {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public int compareTo(Device o) {
+		Integer i1 = this.id;
+		Integer i2 = o.getId();
+		return i1.compareTo(i2);
 	}
 
 }

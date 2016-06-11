@@ -19,5 +19,9 @@
 	<definition name="allCharts" extends="common">
 		<put-attribute name="body" value="/WEB-INF/jsp/allCharts.jsp" />
 	</definition>
+	
+	<definition name="dissagregationDemo" extends="common">
+		<put-attribute name="body" value="/WEB-INF/jsp/dissagregationDemo.jsp" />
+	</definition>
 
 </tiles-definitions>

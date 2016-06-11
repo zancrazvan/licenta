@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.licena.dessagragation.SwitchingTimeExtractor;
+import com.licenta.entity.TimeSlot;
+import com.licenta.test.DeviceGenerator;
+import com.licenta.test.TimeSlotGenerator;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -11,10 +16,17 @@ public class Main {
 		 
 		
 		List<Device> devices = DeviceGenerator.generateDevices();
-		List<SwitchingTime> sws = SwitchingTimeGenerator.generateSwitchingTimes();
+		
+		
+		List<TimeSlot> slots = TimeSlotGenerator.generateRandomDevices(DeviceGenerator.generateDevicesWithStartingTimes(),120);
+		for(int i=0;i<slots.size();i++){
+			System.out.println(slots.get(i).getTime()+","+slots.get(i).getPower());
+		}
+		SwitchingTimeExtractor t = new SwitchingTimeExtractor();
+		List<SwitchingTime> sws = t.extractSwitchingTimes(slots );
 		
 		Chromosome best = null;
-		Chromosome c1 = GeneticAlgorithm.geneticSolution(devices, sws, 2000, 250, 50);
+		Chromosome c1 = GeneticAlgorithm.geneticSolution(devices, sws, 2000, 100, 50);
 		c1.calculateError();
 		best = c1;
 		 

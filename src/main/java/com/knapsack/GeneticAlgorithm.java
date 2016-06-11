@@ -79,13 +79,13 @@ public class GeneticAlgorithm {
 			int fitness = (int) (generetionFitness(population) / populationSize);
 			double mappedFitness = Range.mapRange(0, initialError, 1, 0,
 					population.get(0).getAbsoluteError());
-			System.out.println(gens + "," + mappedFitness+","+population.get(0).getAbsoluteError());
+			//System.out.println(gens + "," + mappedFitness+","+population.get(0).getAbsoluteError());
 		}
 		
-		System.out.println(population.get(0).getAbsoluteError()
+		/*System.out.println(population.get(0).getAbsoluteError()
 				+ "   and mapped: "
 				+ Range.mapRange(0, initialError, 1, 0, population.get(0)
-						.getAbsoluteError()));
+						.getAbsoluteError()));*/
 		Collections.sort(population);
 		return population.get(0);
 	}

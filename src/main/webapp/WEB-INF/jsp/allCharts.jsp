@@ -1,6 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<style>
+.chartWrapper {
+    position: relative;
+}
 
+.chartWrapper > canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events:none;
+}
+
+.chartAreaWrapper {
+    width: 600px;
+    overflow-x: scroll;
+}
+</style>
 
 
 <link rel="stylesheet"
@@ -15,6 +31,7 @@
 		<div class="row">
 			<div style="overflow: scroll; overflow-y: hidden;">
 				<div>
+				
 					<canvas
 						style="max-height: 70vh; margin-left: 5%; margin-right: 5%;"
 						id="line" class="chart chart-bar" chart-data="chart.data"

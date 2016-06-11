@@ -72,10 +72,7 @@ public class SwitchingTimeExtractor {
 		List<SwitchingTime> sws = new ArrayList<>();
 		Collections.sort(timeSlots);
 		TimeSlot t0 = new TimeSlot();
-		Date initialDate = new Date(timeSlots.get(0).getReferenceDate()
-				.getTime()
-				- (1000 * 10 * 60));
-		t0.setReferenceDate(initialDate);
+		 
 		t0.setPower(0);
 		t0.setTime(-1);
 		SwitchingTime current = null;
@@ -110,16 +107,18 @@ public class SwitchingTimeExtractor {
 			TimeSlot prev = timeSlots.get(i - 1);
 
 			if (prev.getPower() - t1.getPower() > 0) {
-				fallingEdges.put(t1.getId(), prev.getPower() - t1.getPower());
+				fallingEdges.put(i, prev.getPower() - t1.getPower());
 				
 			}
 		}
 
 		 
 		for (Integer tm : fallingEdges.keySet()) {
+			
 			for (SwitchingTime s : sws) {
 				if (s.getRelativePower() == fallingEdges.get(tm)) {
-					s.setRunningTime(tm - s.getTime());
+					s.setRunningTime(timeSlots.get(tm).getTime()- s.getTime());
+					System.out.println("fall: "+s.getRelativePower()+" @"+timeSlots.get(tm).getTime());
 					 
 				}
 			}
