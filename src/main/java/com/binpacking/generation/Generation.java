@@ -5,9 +5,10 @@ import java.util.List;
 
 import com.binpacking.bin.Bin;
 import com.binpacking.chromosome.Chromosome;
+import com.binpacking.chromosome.ChromosomeFitness;
 import com.binpacking.element.Element;
 
-public class Generation {
+public class Generation implements Comparable<Generation> {
 
 	private int id;
 	private List<Chromosome> population = new ArrayList<>();
@@ -33,26 +34,54 @@ public class Generation {
 
 		String string = new String();
 
-		string = string + "Generation id: " + this.id + " => ";
+		int nrOfElem = 0;
+		string = string + "Generation id: " + this.id + " => NR OF CHROMOSOMS: " + population.size() + " => ";
 
 		for (Chromosome chromosome : population) {
 			string = string + " CHROMOSOM --->NR OF BINS: " + chromosome.getBins().size() + " --->";
 			for (Bin bin : chromosome.getBins()) {
 
-				string = string + "[";
+				string = string + "[ " + bin.getCapacity() + ":: " + bin.getId() + " :: ";
 				for (Element element : bin.getElements()) {
 
+					nrOfElem++;
 					string = string + (int) element.getValue() + " ";
 				}
-				string = string /*+ ":" + (int) bin.getCapacity()*/ + "]";
+				string = string /* + ":" + (int) bin.getCapacity() */ + "]";
 			}
 
-			string = string + "<--- END CHROMOSOM";
+			string = string + "<--- END CHROMOSOM --- NR OF ELEM: " + nrOfElem;
 
 		}
 
 		return string;
 
+	}
+
+	@Override
+	public int compareTo(Generation o) {
+
+		ChromosomeFitness chromosomeFitness = new ChromosomeFitness();
+
+		double thisFitness = 0;
+		double paramFitness = 0;
+
+		for (Chromosome chromosome : this.getPopulation()) {
+			thisFitness = thisFitness + chromosomeFitness.computeChromosomeFitness(chromosome);
+		}
+
+		for (Chromosome chromosome : o.getPopulation()) {
+			paramFitness = paramFitness + chromosomeFitness.computeChromosomeFitness(chromosome);
+		}
+
+		if (thisFitness < paramFitness) {
+			return -1;
+		}
+		if (thisFitness > paramFitness) {
+			return 1;
+		}
+
+		return 0;
 	}
 
 }

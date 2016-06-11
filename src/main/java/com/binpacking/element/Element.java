@@ -25,7 +25,8 @@ public class Element implements Comparable<Element> {
 	@Override
 	public int compareTo(Element o) {
 
-		return ElementComparator.elementComparator(this, o);
+		ElementComparator elementComparator = new ElementComparator();
+		return elementComparator.elementComparator(this, o);
 	}
 
 	@Override

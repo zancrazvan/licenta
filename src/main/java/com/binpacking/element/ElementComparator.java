@@ -2,7 +2,7 @@ package com.binpacking.element;
 
 public class ElementComparator {
 
-	public static int elementComparator(Element firstElement, Element secondElement) {
+	public int elementComparator(Element firstElement, Element secondElement) {
 
 		if (firstElement.getId() == secondElement.getId()) {
 

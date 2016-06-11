@@ -9,7 +9,9 @@ import com.binpacking.util.Randomizer;
 
 public class ChromosomeMutator {
 
-	public static void mutate(Chromosome chromosome, int probability, int mutionSize) {
+	public void mutate(Chromosome chromosome, int probability, int mutionSize) {
+
+		ChromosomeDAO chromosomeDAO = new ChromosomeDAO();
 
 		if (Randomizer.generate(0, 100) < probability) {
 
@@ -42,7 +44,7 @@ public class ChromosomeMutator {
 				bin.getElements().clear();
 			}
 
-			ChromosomeDAO.addFreeItems(elements, chromosome);
+			chromosomeDAO.addFreeItems(elements, chromosome);
 
 		}
 

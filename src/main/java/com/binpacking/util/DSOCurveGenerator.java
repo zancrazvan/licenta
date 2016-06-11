@@ -7,15 +7,17 @@ import com.binpacking.bin.Bin;
 
 public class DSOCurveGenerator {
 
-	public static List<Bin> generateBinCurve() {
+	public List<Bin> generateBinCurve() {
+
+		System.out.println("--- GENERATING DSO CURVE ---");
 
 		List<Bin> bins = new ArrayList<>();
 
-		for (int i = 0; i < 144; i++) {
+		for (int i = 0; i < 10; i++) { 
 
 			Bin bin = new Bin();
 			bin.setId(i);
-			bin.setCapacity(Randomizer.generate(500, 3000));
+			bin.setCapacity(Randomizer.generate(300, 2000));
 			bins.add(bin);
 		}
 

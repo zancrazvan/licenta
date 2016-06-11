@@ -31,14 +31,15 @@ public class Chromosome implements Comparable<Chromosome> {
 	@Override
 	public int compareTo(Chromosome arg0) {
 
-		if (ChromosomeFitness.computeChromosomeFitness(this) < ChromosomeFitness.computeChromosomeFitness(arg0)) {
+		ChromosomeFitness chromosomeFitness = new ChromosomeFitness();
+		if (chromosomeFitness.computeChromosomeFitness(this) > chromosomeFitness.computeChromosomeFitness(arg0)) {
 			return 1;
 		}
-		if (ChromosomeFitness.computeChromosomeFitness(this) > ChromosomeFitness.computeChromosomeFitness(arg0)) {
+		if (chromosomeFitness.computeChromosomeFitness(this) < chromosomeFitness.computeChromosomeFitness(arg0)) {
 			return -1;
 		}
-		if (ChromosomeFitness.computeChromosomeFitness(this)
-				- ChromosomeFitness.computeChromosomeFitness(arg0) < .000000001) {
+		if (chromosomeFitness.computeChromosomeFitness(this)
+				- chromosomeFitness.computeChromosomeFitness(arg0) < .000000001) {
 			return 0;
 		}
 		return 0;
