@@ -11,20 +11,15 @@ angular.module('licenta').controller(
 				"pointHighlightFill" : "#00f",
 				"pointHighlightStroke" : "rgba(255,255,255,1)"
 			} ];
-
-			$scope.options = [ {
-				title : {
-					display : true,
-					text : 'Custom Chart Title'
-				},
-				scales : {
-					yAxes : [ {
-						ticks : {
-							beginAtZero : false
-						}
-					} ]
-				}
-			} ];
+			$scope.options = {
+		        
+		        mantainAspectRatio: false,
+		        title: {
+		            display: true,
+		            text: 'Custom Chart Title'
+		        }
+		    }
+			 
 			console.log("created");
 			$http.get('/chartToBeDissagregated').success(
 					function(data, status, headers, config) {
@@ -60,7 +55,7 @@ angular.module('licenta').controller(
 								} 
 							}
 							chart.data.push(val);
-							chart.series.push(i);
+							chart.series.push('aparat '+i);
 							console.log(chart.series);
 						}
 						$scope.charts = chart;

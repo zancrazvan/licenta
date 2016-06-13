@@ -96,8 +96,8 @@
 			<div class="box-body">
 				<div style="overflow: scroll; overflow-y: hidden;">
 					<div
-						style="width: 175%; ">
-						<canvas style="max-height:800px" id="line" class="chart chart-bar" chart-data="charts.data"
+						style="width: 150%; ">
+						<canvas style="max-height:750px" id="line" class="chart chart-bar" chart-data="charts.data"
 							chart-labels="charts.labels" chart-legend="true"
 							chart-series="charts.series" chart-click="onClick"
 							chart-colours="colors" chart-options="options"> </canvas>
