@@ -12,22 +12,29 @@ import com.binpacking.util.Randomizer;
 
 public class ChromosomeDAO {
 
-	public static void addFreeItems(List<Element> elements, Chromosome chromosome) {
+	public void addFreeItems(List<Element> elements, Chromosome chromosome) {
 
 		Collections.sort(elements, Collections.reverseOrder());
 		firstFitElement(elements, chromosome);
 	}
 
-	public static void insertRandom(List<Element> elements, Chromosome chromosome) {
+	public void insertRandom(List<Element> elements, List<Bin> bins, Chromosome chromosome) {
 
 		Collections.shuffle(elements);
-		firstFitElement(elements, chromosome);
+		firstFitElement(elements, bins, chromosome);
 	}
 
-	private static void firstFitElement(List<Element> elements, Chromosome chromosome) {
+	public void firstFitElement(List<Element> elements, List<Bin> bins, Chromosome chromosome) {
 
-		if (chromosome.getBins().size() == 0) {
-			System.out.println("SIZE 0");
+		BinDAO binDAO = new BinDAO();
+
+		chromosome.getBins().clear();
+
+		for (int i = 0; i < bins.size(); i++) {
+			Bin bin2 = new Bin();
+			bin2.setId(i);
+			bin2.setCapacity(bins.get(i).getCapacity());
+			chromosome.getBins().add(bin2);
 		}
 
 		for (Element element : elements) {
@@ -36,27 +43,51 @@ public class ChromosomeDAO {
 			for (Bin bin : chromosome.getBins()) {
 
 				Bin test = new Bin();
+				test.setCapacity(bin.getCapacity());
 				List<Element> elements2 = new ArrayList<>();
 				elements2.add(element);
 				test.setElements(elements2);
 
-				if ((BinDAO.getFilled(test) <= bin.getCapacity() - BinDAO.getFilled(bin)) && added == false
-						&& !(contains(chromosome.getBins(), element))) {
+				if ((binDAO.getFilled(test) <= bin.getCapacity() - binDAO.getFilled(bin)) && added == false) {
 
 					bin.getElements().add(element);
 					added = true;
-
 				}
 
-			}
-			if (added == false) {
 			}
 
 		}
 
 	}
 
-	public static Point computeCrossoverPoints(int delta, Chromosome chromosome) {
+	public void firstFitElement(List<Element> elements, Chromosome chromosome) {
+
+		BinDAO binDAO = new BinDAO();
+
+		for (Element element : elements) {
+
+			boolean added = false;
+			for (Bin bin : chromosome.getBins()) {
+
+				Bin test = new Bin();
+				test.setCapacity(bin.getCapacity());
+				List<Element> elements2 = new ArrayList<>();
+				elements2.add(element);
+				test.setElements(elements2);
+
+				if ((binDAO.getFilled(test) <= bin.getCapacity() - binDAO.getFilled(bin)) && added == false) {
+
+					bin.getElements().add(element);
+					added = true;
+				}
+
+			}
+
+		}
+
+	}
+
+	public Point computeCrossoverPoints(int delta, Chromosome chromosome) {
 
 		Point point = new Point();
 
@@ -72,7 +103,7 @@ public class ChromosomeDAO {
 				point.setY(chromosome.getBins().size());
 			} else {
 
-				point.setY(Randomizer.generate(point.getX(), point.getX() + delta));
+				point.setY(Randomizer.generate(point.getX(), chromosome.getBins().size()));
 			}
 
 		}
@@ -80,14 +111,14 @@ public class ChromosomeDAO {
 
 	}
 
-	public static int getCrossoverPoint(Chromosome chromosome) {
+	public int getCrossoverPoint(Chromosome chromosome) {
 		return Randomizer.generate(1, chromosome.getBins().size() - 1);
 	}
 
-	public static List<Bin> genBinsByDivision1(Chromosome chromosome, int point) {
+	public List<Bin> genBinsByDivision1(Chromosome chromosome, Point point) {
 
 		List<Bin> bins = new ArrayList<>();
-		for (int i = 0; i < point; i++) {
+		for (int i = point.getX(); i < point.getY(); i++) {
 
 			bins.add(chromosome.getBins().get(i));
 		}
@@ -96,7 +127,7 @@ public class ChromosomeDAO {
 
 	}
 
-	public static List<Bin> genBinsByDivision2(Chromosome chromosome, int point) {
+	public List<Bin> genBinsByDivision2(Chromosome chromosome, int point) {
 
 		List<Bin> bins = new ArrayList<>();
 		for (int i = point; i < chromosome.getBins().size(); i++) {
@@ -108,41 +139,58 @@ public class ChromosomeDAO {
 
 	}
 
-	public static void insertBinsOnPos1(List<Bin> bins, Chromosome chromosome, int point) {
+	public void insertBinsOnPos1(List<Bin> bins, Chromosome chromosome, Point point) {
 
-		List<Bin> toRemove = new ArrayList<>();
 		List<Element> elements = new ArrayList<>();
-		for (int i = 0; i < point; i++) {
-
-			toRemove.add(chromosome.getBins().get(i));
-			elements.addAll(chromosome.getBins().get(i).getElements());
-		}
-		chromosome.getBins().removeAll(toRemove);
-		chromosome.getBins().addAll(0, bins);
+		List<Element> oldElements = new ArrayList<>();
+		BinDAO binDAO = new BinDAO();
 
 		for (Bin bin : chromosome.getBins()) {
 			for (Bin bin2 : bins) {
 
-				if (!bin.equals(bin2)) {
-
-					for (Element element : bin.getElements()) {
-						if (!elements.contains(element)) {
-
-							elements.add(element);
-						}
+				if (bin.getId() == bin2.getId()) {
+					if (binDAO.getFitness(bin2) > binDAO.getFitness(bin)) {
+						oldElements.addAll(bin.getElements());
+						bin.setElements(bin2.getElements());
 					}
-
 				}
-
 			}
-			bin.getElements().clear();
 		}
 
-		ChromosomeDAO.addFreeItems(elements, chromosome);
+		for (Bin bin : chromosome.getBins()) {
+			for (Bin bin2 : bins) {
+				if (!bin.equals(bin2) && (binDAO.getFitness(bin2) < binDAO.getFitness(bin))) {
+
+					List<Element> toRemove = new ArrayList<>();
+
+					for (Element element : bin.getElements()) {
+						for (Element element2 : bin2.getElements()) {
+
+							if ((element.getId() == element2.getId()) && (element.getValue() == element2.getValue())) {
+								toRemove.add(element);
+								bin.setMarkedForDelete(true);
+							}
+						}
+					}
+					bin.getElements().removeAll(toRemove);
+
+				}
+			}
+		}
+
+		for (Bin bin : chromosome.getBins()) {
+			if (bin.isMarkedForDelete()) {
+				elements.addAll(bin.getElements());
+				bin.getElements().clear();
+			}
+		}
+
+		addFreeItems(elements, chromosome);
+		addFreeItems(oldElements, chromosome);
 
 	}
 
-	public static void insertBinsOnPos2(List<Bin> bins, Chromosome chromosome, int point) {
+	public void insertBinsOnPos2(List<Bin> bins, Chromosome chromosome, int point) {
 
 		List<Bin> toRemove = new ArrayList<>();
 		List<Element> elements = new ArrayList<>();
@@ -172,10 +220,23 @@ public class ChromosomeDAO {
 			bin.getElements().clear();
 		}
 
-		ChromosomeDAO.addFreeItems(elements, chromosome);
+		List<Bin> newBins = new ArrayList<>();
+
+		for (Bin bin : chromosome.getBins()) {
+			if (bin.isMarkedForDelete()) {
+				elements.addAll(bin.getElements());
+				bin.getElements().clear();
+			} else {
+				// newBins.add(bin);
+			}
+
+		}
+		// chromosome.setBins(newBins);
+		addFreeItems(elements, chromosome);
+
 	}
 
-	public static void deleteDuplicatesByBins(List<Bin> bins, Chromosome chromosome) {
+	public void deleteDuplicatesByBins(List<Bin> bins, Chromosome chromosome) {
 
 		for (Bin bin : chromosome.getBins()) {
 
@@ -217,11 +278,11 @@ public class ChromosomeDAO {
 
 		}
 		chromosome.setBins(newBins);
-		ChromosomeDAO.addFreeItems(freeElements, chromosome);
+		addFreeItems(freeElements, chromosome);
 
 	}
 
-	public static boolean contains(List<Bin> bins, Element element) {
+	public boolean contains(List<Bin> bins, Element element) {
 
 		for (Bin bin : bins) {
 

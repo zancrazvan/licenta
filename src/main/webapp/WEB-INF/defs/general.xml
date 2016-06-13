@@ -11,17 +11,26 @@
 	<definition name="index" extends="common">
 		<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
 	</definition>
-	
+
 	<definition name="chart-example" extends="common">
 		<put-attribute name="body" value="/WEB-INF/jsp/chart-example.jsp" />
 	</definition>
-	
+
 	<definition name="allCharts" extends="common">
 		<put-attribute name="body" value="/WEB-INF/jsp/allCharts.jsp" />
 	</definition>
-	
+
 	<definition name="dissagregationDemo" extends="common">
-		<put-attribute name="body" value="/WEB-INF/jsp/dissagregationDemo.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/dissagregationDemo.jsp" />
+	</definition>
+
+	<definition name="optimizationData" extends="common">
+		<put-attribute name="body" value="/WEB-INF/jsp/optimizationData.jsp" />
+	</definition>
+
+	<definition name="optimizationGraph" extends="common">
+		<put-attribute name="body" value="/WEB-INF/jsp/optimizationGraph.jsp" />
 	</definition>
 
 </tiles-definitions>

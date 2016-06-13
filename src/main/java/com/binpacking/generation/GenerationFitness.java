@@ -5,13 +5,14 @@ import com.binpacking.chromosome.ChromosomeFitness;
 
 public class GenerationFitness {
 
-	public static double computeGenerationFitness(Generation generation) {
+	public double computeGenerationFitness(Generation generation) {
 
+		ChromosomeFitness chromosomeFitness = new ChromosomeFitness();
 		double fitness = 0;
 
 		for (Chromosome chromosome : generation.getPopulation()) {
 
-			fitness = fitness + ChromosomeFitness.computeChromosomeFitness(chromosome);
+			fitness = fitness + chromosomeFitness.computeChromosomeFitness(chromosome);
 		}
 
 		return fitness;

@@ -6,32 +6,32 @@ import com.binpacking.element.Element;
 
 public class BinDAO {
 
-	public static Element getElementByIndex(int index, Bin bin) {
+	public Element getElementByIndex(int index, Bin bin) {
 
 		return bin.getElements().get(index);
 	}
 
-	public static void addElement(Element element, Bin bin) {
+	public void addElement(Element element, Bin bin) {
 
 		bin.getElements().add(element);
 	}
 
-	public static void replaceAllElements(List<Element> elements, Bin bin) {
+	public void replaceAllElements(List<Element> elements, Bin bin) {
 
 		bin.getElements().clear();
 		bin.setElements(elements);
 	}
 
-	public static void removeElement(int index, Bin bin) {
+	public void removeElement(int index, Bin bin) {
 
 		bin.getElements().remove(index);
 	}
 
-	public static void clearElements(Bin bin) {
+	public void clearElements(Bin bin) {
 		bin.getElements().clear();
 	}
 
-	public static double getFilled(Bin bin) {
+	public double getFilled(Bin bin) {
 
 		double filled = 0;
 
@@ -41,6 +41,19 @@ public class BinDAO {
 		}
 		return filled;
 
+	}
+
+	public double getFitness(Bin bin) {
+		
+		double fitness = 0;
+		int k = 2;
+
+		double fill = getFilled(bin);
+		double capacity = bin.getCapacity();
+
+		fitness = Math.pow(fill / capacity, k);
+
+		return fitness;
 	}
 
 }

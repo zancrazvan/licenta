@@ -5,70 +5,57 @@ import java.util.List;
 import java.util.Map;
 
 import com.binpacking.bin.Bin;
+import com.binpacking.chromosome.Chromosome;
+import com.binpacking.chromosome.ChromosomeDAO;
+import com.binpacking.chromosome.ChromosomeFitness;
 import com.binpacking.element.Element;
 import com.binpacking.generation.Generation;
 import com.binpacking.generation.GenerationDAO;
-import com.knapsack.Device;
-import com.knapsack.DeviceGenerator;
-import com.knapsack.GeneticAlgorithm;
-import com.knapsack.SwitchingTime;
-import com.knapsack.SwitchingTimeGenerator;
+import com.binpacking.generation.GenerationFitness;
+import com.binpacking.util.DeviceGenerator;
+import com.binpacking.util.FileHandler;
+import com.binpacking.util.Randomizer;
 
 public class Main2 {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {/*
 
-		// int elements[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-
+		DeviceGenerator deviceGenerator = new DeviceGenerator();
 		List<Element> list = new ArrayList<>();
-		Map<SwitchingTime, Device> map = GeneticAlgorithm.geneticSolution(DeviceGenerator.generateDevices(),
-				SwitchingTimeGenerator.generateSwitchingTimes(), 1000, 150, 100).getSolution();
+		list = deviceGenerator.generateDevices();
 
-		int k = 0;
-		for (SwitchingTime switchingTime : map.keySet()) {
+		GenerationFitness generationFitness = new GenerationFitness();
+		GenerationDAO generationDAO = new GenerationDAO();
+		ChromosomeDAO chromosomeDAO = new ChromosomeDAO();
 
-			Device device = map.get(switchingTime);
-			int runsInBins = switchingTime.getRunningTime();
+		Generation generation = generationDAO.initializeFirstGeneration(list, 100);
 
-			for (int j = 0; j < runsInBins; j++) {
-				 
-				Element element = new Element();
-				element.setId(k);
-				element.setValue(device.getPower());
-				k++;
-				list.add(element);
+		String info = new String();
+		String info2 = new String();
 
-			}
-
-		}
-
-		/*
-		 * for (int i = 0; i < elements.length; i++) {
-		 * 
-		 * Element element = new Element(); element.setId(i);
-		 * element.setValue(elements[i]);
-		 * 
-		 * list.add(element);
-		 * 
-		 * }
-		 */
-
-		Generation generation = GenerationDAO.initializeFirstGeneration(list, 100);
-		System.out.println(generation.getPopulation().size() + " " + generation.toString());
-
-		for (int i = 1; i <= 20; i++) {
+		info = info + "0 " + "," + generationFitness.computeGenerationFitness(generation) / 100 + "," + "\r\n";
+		info2 = info2 + generation.toString() + "\r\n";
+		for (int i = 1; i <= 60; i++) {
 
 			generation.setId(i);
-			generation = GenerationDAO.selection(generation);
-			generation = GenerationDAO.generateNextGeneration(generation);
-			 
-			generation = GenerationDAO.mutate(generation);
- 
-			
-		}
-		System.out.println(generation.getPopulation().size() + " , " + generation.toString());
-		System.out.println("gata");
+			generation = generationDAO.selection(generation);
+			generation = generationDAO.generateNextGeneration(generation, list);
 
-	}
+			generation = generationDAO.mutate(generation);
+
+			info = info + generation.getId() + "," + generationFitness.computeGenerationFitness(generation) / 100 + ","
+					+ "\r\n";
+			info2 = info2 + generation.toString() + "\r\n";
+			System.out.println(generation.toString());
+
+		}
+
+		FileHandler fileHandler = new FileHandler();
+		fileHandler.write(info, "binPackingRes.csv");
+
+		FileHandler fileHandler2 = new FileHandler();
+		fileHandler2.write(info2, "binPackingLog.txt");
+
+	*/}
 
 }

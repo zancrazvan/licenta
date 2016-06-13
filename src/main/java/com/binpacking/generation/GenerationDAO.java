@@ -16,39 +16,23 @@ import com.binpacking.util.Randomizer;
 
 public class GenerationDAO {
 
-	public static Generation initializeFirstGeneration(List<Element> elements, int size) {
+	public Generation initializeFirstGeneration(List<Element> elements, int size, List<Bin> bins) {
 
 		Generation generation = new Generation();
+		ChromosomeDAO chromosomeDAO = new ChromosomeDAO();
 
 		for (int i = 0; i < size; i++) {
 
-			List<Bin> bins = new ArrayList<>();
-			bins = DSOCurveGenerator.generateBinCurve();
-
-			 
-			/*
-			 * Bin bin = new Bin(); bin.setCapacity(10); Bin bin2 = new Bin();
-			 * bin2.setCapacity(10); Bin bin3 = new Bin(); bin3.setCapacity(10);
-			 * Bin bin4 = new Bin(); bin4.setCapacity(10); Bin bin5 = new Bin();
-			 * bin5.setCapacity(10); Bin bin6 = new Bin(); bin6.setCapacity(10);
-			 * Bin bin7 = new Bin(); bin7.setCapacity(10);
-			 * 
-			 * bins.add(bin); bins.add(bin2); bins.add(bin3); bins.add(bin4);
-			 * bins.add(bin5); bins.add(bin6); //bins.add(bin7);
-			 */
 			Chromosome chromosome = new Chromosome();
-			chromosome.setBins(bins);
-			ChromosomeDAO.insertRandom(elements, chromosome);
+			chromosomeDAO.insertRandom(elements, bins, chromosome);
 			generation.getPopulation().add(chromosome);
 
-			// System.out.println("First GEN: " + generation.toString());
 		}
-
+		System.out.println("First GEN: " + generation.toString());
 		return generation;
+	}
 
-	} 
-
-	public static Generation selection(Generation generation) {
+	public Generation selection(Generation generation) {
 
 		Collections.sort(generation.getPopulation(), Collections.reverseOrder());
 
@@ -63,11 +47,12 @@ public class GenerationDAO {
 		return generation;
 	}
 
-	public static Generation mutate(Generation generation) {
+	public Generation mutate(Generation generation) {
 
+		ChromosomeMutator chromosomeMutator = new ChromosomeMutator();
 		for (Chromosome chromosome : generation.getPopulation()) {
 
-			ChromosomeMutator.mutate(chromosome, 20, 2);
+			chromosomeMutator.mutate(chromosome, 10, 1);
 		}
 
 		return generation;
@@ -78,25 +63,19 @@ public class GenerationDAO {
 		return generation.getPopulation().get(position);
 	}
 
-	public static Generation generateNextGeneration(Generation generation) {
+	public Generation generateNextGeneration(Generation generation, List<Element> elements) {
+
+		ChromosomeCrossover chromosomeCrossover = new ChromosomeCrossover();
 
 		Generation nextGeneration = new Generation();
 		nextGeneration.setId(generation.getId());
 		nextGeneration.setPopulation(generation.getPopulation());
 
+		Collections.sort(nextGeneration.getPopulation(), Collections.reverseOrder());
 		List<Chromosome> tournament = new ArrayList<>();
 
-		int i = 0;
-		while (i < 10) {
-
-			Chromosome chromosome = nextGeneration.getPopulation()
-					.get(Randomizer.generate(0, generation.getPopulation().size() - 1));
-
-			if (!tournament.contains(chromosome)) {
-				tournament.add(chromosome);
-				i++;
-			}
-
+		for (int i = 0; i < 10; i++) {
+			tournament.add(nextGeneration.getPopulation().get(i));
 		}
 
 		Collections.sort(tournament, Collections.reverseOrder());
@@ -107,23 +86,26 @@ public class GenerationDAO {
 		Chromosome copyChromosome1 = chromosome1;
 		Chromosome copyChromosome2 = chromosome2;
 
-		ChromosomeCrossover.crossover(copyChromosome1, copyChromosome2, 80);
+		chromosomeCrossover.crossover(copyChromosome1, copyChromosome2, 80);
 
-		chromosome1 = copyChromosome1;
-		chromosome2 = copyChromosome2;
+		Collections.sort(nextGeneration.getPopulation());
+
+		nextGeneration.getPopulation().get(0).setBins(copyChromosome1.getBins());
+		nextGeneration.getPopulation().get(1).setBins(copyChromosome2.getBins());
 
 		return nextGeneration;
 
 	}
 
-	public static Chromosome getBestChromosome(Generation generation) {
+	public Chromosome getBestChromosome(Generation generation) {
 
+		ChromosomeFitness chromosomeFitness = new ChromosomeFitness();
 		Chromosome bestChromosome = new Chromosome();
 		bestChromosome = generation.getPopulation().get(0);
 
 		for (Chromosome chromosome : generation.getPopulation()) {
 
-			if (ChromosomeFitness.computeChromosomeFitness(chromosome) > ChromosomeFitness
+			if (chromosomeFitness.computeChromosomeFitness(chromosome) > chromosomeFitness
 					.computeChromosomeFitness(bestChromosome)) {
 				bestChromosome = chromosome;
 			}
