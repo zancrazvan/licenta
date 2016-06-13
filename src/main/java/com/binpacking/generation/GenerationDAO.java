@@ -16,12 +16,10 @@ import com.binpacking.util.Randomizer;
 
 public class GenerationDAO {
 
-	public Generation initializeFirstGeneration(List<Element> elements, int size) {
+	public Generation initializeFirstGeneration(List<Element> elements, int size, List<Bin> bins) {
 
 		Generation generation = new Generation();
 		ChromosomeDAO chromosomeDAO = new ChromosomeDAO();
-		DSOCurveGenerator curveGenerator = new DSOCurveGenerator();
-		List<Bin> bins = curveGenerator.generateBinCurve();
 
 		for (int i = 0; i < size; i++) {
 

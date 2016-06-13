@@ -26,8 +26,11 @@
 	</definition>
 
 	<definition name="optimizationData" extends="common">
-		<put-attribute name="body"
-			value="/WEB-INF/jsp/optimizationData.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/optimizationData.jsp" />
+	</definition>
+
+	<definition name="optimizationGraph" extends="common">
+		<put-attribute name="body" value="/WEB-INF/jsp/optimizationGraph.jsp" />
 	</definition>
 
 </tiles-definitions>
