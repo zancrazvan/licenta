@@ -18,7 +18,7 @@ import com.binpacking.util.Randomizer;
 
 public class Main2 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {/*
 
 		DeviceGenerator deviceGenerator = new DeviceGenerator();
 		List<Element> list = new ArrayList<>();
@@ -56,6 +56,6 @@ public class Main2 {
 		FileHandler fileHandler2 = new FileHandler();
 		fileHandler2.write(info2, "binPackingLog.txt");
 
-	}
+	*/}
 
 }
