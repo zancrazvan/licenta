@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.knapsack.Chromosome;
-import com.knapsack.Device;
 import com.knapsack.GeneticAlgorithm;
-import com.knapsack.SwitchingTime;
 import com.licena.dessagragation.SwitchingTimeExtractor;
 import com.licenta.dto.ChartDto;
+import com.licenta.entity.Device;
+import com.licenta.entity.SwitchingTime;
 import com.licenta.entity.TimeSlot;
 import com.licenta.test.DeviceGenerator;
 import com.licenta.test.TimeSlotGenerator;

@@ -8,7 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 
+
+
 import com.binpacking.util.Randomizer;
+import com.licenta.entity.Device;
+import com.licenta.entity.SwitchingTime;
 
 public class GeneticAlgorithm {
 

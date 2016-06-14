@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.binpacking.util.Randomizer;
-import com.knapsack.Device;
+import com.licenta.entity.Device;
 import com.licenta.entity.TimeSlot;
 
 public class TimeSlotGenerator {

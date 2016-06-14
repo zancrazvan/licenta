@@ -1,7 +1,12 @@
-package com.knapsack;
+package com.licenta.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Device implements Comparable<Device> {
 
+	@Id
 	private int id;
 	private int power;
 	private boolean alwaysOn;

@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.licena.dessagragation.SwitchingTimeExtractor;
+import com.licenta.entity.Device;
+import com.licenta.entity.SwitchingTime;
 import com.licenta.entity.TimeSlot;
 import com.licenta.test.DeviceGenerator;
 import com.licenta.test.TimeSlotGenerator;

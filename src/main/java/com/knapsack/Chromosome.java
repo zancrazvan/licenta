@@ -2,6 +2,9 @@ package com.knapsack;
 
 import java.util.Map;
 
+import com.licenta.entity.Device;
+import com.licenta.entity.SwitchingTime;
+
 public class Chromosome implements Comparable<Chromosome> {
 
 	private Map<SwitchingTime, Device> solution;

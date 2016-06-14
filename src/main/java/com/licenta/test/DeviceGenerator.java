@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.knapsack.Device;
+import com.licenta.entity.Device;
 
 public class DeviceGenerator {
 

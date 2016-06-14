@@ -3,6 +3,8 @@ package com.knapsack;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.licenta.entity.SwitchingTime;
+
 public class SwitchingTimeGenerator {
 
 	public static List<SwitchingTime> generateSwitchingTimes() {

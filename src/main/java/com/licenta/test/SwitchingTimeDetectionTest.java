@@ -2,8 +2,8 @@ package com.licenta.test;
 
 import java.util.List;
 
-import com.knapsack.SwitchingTime;
 import com.licena.dessagragation.SwitchingTimeExtractor;
+import com.licenta.entity.SwitchingTime;
 import com.licenta.entity.TimeSlot;
 
 public class SwitchingTimeDetectionTest {

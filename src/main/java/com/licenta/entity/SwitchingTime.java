@@ -1,7 +1,13 @@
-package com.knapsack;
+package com.licenta.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class SwitchingTime implements Comparable<SwitchingTime> {
 
+	@Id
+	private int id;
 	private int time;
 	private int relativePower;
 	private int absolutePower;
@@ -25,6 +31,14 @@ public class SwitchingTime implements Comparable<SwitchingTime> {
 		this.relativePower = relativePower;
 		this.absolutePower = absolutePower;
 		this.runningTime = runningTime;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getTime() {
