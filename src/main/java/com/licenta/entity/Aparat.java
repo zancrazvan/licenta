@@ -1,8 +1,7 @@
 package com.licenta.entity;
 
- 
-import org.hibernate.annotations.Entity;
-import org.springframework.data.annotation.Id;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Aparat {
@@ -11,11 +10,11 @@ public class Aparat {
 	private int id;
 
 	private float putere;
-	
+
 	private int runningTime;
-	
+
 	private boolean always;
-	
+
 	private String name;
 
 	public int getId() {

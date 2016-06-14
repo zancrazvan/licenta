@@ -23,4 +23,14 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<context-param>
+		<param-name>spring.profiles.default</param-name>
+		<param-value>prod
+		</param-value>
+	</context-param>
 </web-app>
