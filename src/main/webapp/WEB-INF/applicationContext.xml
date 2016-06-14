@@ -20,7 +20,7 @@
 	<jpa:repositories base-package="com.licenta.repository"
 		entity-manager-factory-ref="emf" />
 
-
+	<import resource="security.xml" />
 
 	<beans profile="dev">
 		<import resource="database-dev.xml" />
