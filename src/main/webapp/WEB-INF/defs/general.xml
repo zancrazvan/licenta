@@ -24,6 +24,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/dissagregationDemo.jsp" />
 	</definition>
+	<definition name="dissagregationLoadTests" extends="common">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/dissagregationLoadTests.jsp" />
+	</definition>
 
 	<definition name="optimizationData" extends="common">
 		<put-attribute name="body" value="/WEB-INF/jsp/optimizationData.jsp" />

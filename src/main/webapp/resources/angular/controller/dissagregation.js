@@ -2,7 +2,7 @@
 angular.module('licenta').controller(
 		'DissagregationController',
 		function($scope, $http) {
-			$scope.greeting = "hello";
+			$scope.greeting = "interactiv? == ";
 			$scope.colors = [ { // default
 				"fillColor" : "rgba(255, 0, 0, 1)",
 				"strokeColor" : "rgba(255,0,0,1)",
@@ -12,14 +12,14 @@ angular.module('licenta').controller(
 				"pointHighlightStroke" : "rgba(255,255,255,1)"
 			} ];
 			$scope.options = {
-		        
-		        mantainAspectRatio: false,
-		        title: {
-		            display: true,
-		            text: 'Custom Chart Title'
-		        }
-		    }
-			 
+
+				mantainAspectRatio : false,
+				title : {
+					display : true,
+					text : 'Custom Chart Title'
+				}
+			}
+
 			console.log("created");
 			$http.get('/chartToBeDissagregated').success(
 					function(data, status, headers, config) {
@@ -41,21 +41,23 @@ angular.module('licenta').controller(
 							labels[j] = data.timeSlots[j].time;
 							values[j] = data.timeSlots[j].power;
 						}
-						chart.series = [ 'Total'];
+						chart.series = [ 'Total' ];
 						chart.labels = labels;
-						chart.data = [ values];
-				
-						
-						for(i=0;i<data.switches.length;i++){
+						chart.data = [ values ];
+
+						for (i = 0; i < data.switches.length; i++) {
 							var val = [];
 							console.log(data.switches[i]);
-							for(j=0;j<=50;j++){
-								if(j>=data.switches[i].time && j<data.switches[i].time+data.switches[i].runningTime-1){
-									val[j]=data.switches[i].relativePower;
-								} 
+							for (j = 0; j <= 50; j++) {
+								if (j >= data.switches[i].time
+										&& j < data.switches[i].time
+												+ data.switches[i].runningTime
+												- 1) {
+									val[j] = data.switches[i].relativePower;
+								}
 							}
 							chart.data.push(val);
-							chart.series.push('aparat '+i);
+							chart.series.push('aparat ' + i);
 							console.log(chart.series);
 						}
 						$scope.charts = chart;
@@ -77,5 +79,60 @@ angular.module('licenta').controller(
 					}).error(function(data, status, headers, config) {
 				console.log("first loggggg error");
 			});
+			$scope.step4 = false;
+			$scope.step0 = true;
+			$scope.step1 = false;
+			$scope.step2 = false;
+			$scope.step3 = false;
+			 
+
+			$scope.showStep0 = function() {
+				$scope.step4 = false;
+				$scope.step0 = true;
+				$scope.step1 = false;
+				$scope.step2 = false;
+				$scope.step3 = false;
+				$(window).scrollTop(0);
+				console.log("step1");
+				 
+			};
+			$scope.showStep1 = function() {
+				$scope.step0 = false;
+				$scope.step1 = true;
+				$scope.step2 = false;
+				$scope.step3 = false;
+				$(window).scrollTop(0);
+				console.log("step1");
+				 
+			};
+			$scope.showStep2 = function() {
+				$scope.step0 = false;
+				$scope.step1 = false;
+				$scope.step2 = true;
+				$scope.step3 = false;
+				$(window).scrollTop(0);
+				console.log("step2");
+				 
+			};
+			$scope.showStep3 = function() {
+				$scope.step0 = false;
+				$scope.step1 = false;
+				$scope.step2 = false;
+				$scope.step3 = true;
+				$(window).scrollTop(0);
+				console.log("step3");
+				 
+			};
+			$scope.showStep4 = function() {
+				$scope.step0 = false;
+				$scope.step1 = false;
+				$scope.step2 = false;
+				$scope.step3 = false;
+				$scope.step4 = true;
+				$(window).scrollTop(0);
+				console.log("step3");
+				 
+			};
+			 
 
 		});
