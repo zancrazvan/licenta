@@ -7,8 +7,7 @@
 
 
 	<http use-expressions="true">
-		<intercept-url pattern="/**"
-			access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
+		<intercept-url pattern="/" access="hasAnyRole('ADMIN', 'USER')" />
 
 		<form-login login-page="/login" authentication-failure-url="/login?failed=true" />
 		<logout logout-url="/logout" />

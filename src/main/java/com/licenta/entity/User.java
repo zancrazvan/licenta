@@ -1,9 +1,13 @@
 package com.licenta.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.licenta.enumeration.Role;
 
 @Entity(name = "TheUser")
 @Table(name = "TheUser")
@@ -20,6 +24,9 @@ public class User {
 	private String firstName;
 
 	private String lastName;
+
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 	public int getId() {
 		return id;
@@ -59,6 +66,14 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }
