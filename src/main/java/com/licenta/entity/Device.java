@@ -1,19 +1,27 @@
 package com.licenta.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Device implements Comparable<Device> {
 
 	@Id
+	@GeneratedValue
 	private int id;
 	private int power;
 	private boolean alwaysOn;
-	
+
 	private String picturePath;
 
 	private String name;
+
+	@ManyToOne
+	@JoinColumn(name = "house")
+	private House house;
 
 	public Device() {
 		// TODO Auto-generated constructor stub

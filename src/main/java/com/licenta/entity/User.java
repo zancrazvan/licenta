@@ -1,10 +1,15 @@
 package com.licenta.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.licenta.enumeration.Role;
@@ -24,6 +29,9 @@ public class User {
 	private String firstName;
 
 	private String lastName;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<House> houses;
 
 	@Enumerated(EnumType.STRING)
 	private Role role;
