@@ -1,6 +1,14 @@
 package com.knapsack;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+
+import com.licenta.entity.Device;
+import com.licenta.entity.SwitchingTime;
 
 public class Chromosome implements Comparable<Chromosome> {
 
@@ -50,6 +58,29 @@ public class Chromosome implements Comparable<Chromosome> {
 					+ " \n";
 		}
 		return pri;
+	}
+
+	public void sortSolution() {
+		 this.sortByValue(solution);
+	}
+
+	private void sortByValue(Map<SwitchingTime, Device> map) {
+		List<Map.Entry<SwitchingTime, Device>> list = new LinkedList<Map.Entry<SwitchingTime, Device>>(
+				map.entrySet());
+		Collections.sort(list, new Comparator<Map.Entry<SwitchingTime, Device>>() {
+			public int compare(Map.Entry<SwitchingTime, Device> o1, Map.Entry<SwitchingTime, Device> o2) {
+				Integer i1 = o1.getKey().getTime();
+				Integer i2 = o2.getKey().getTime();
+				return (i1.compareTo(i2));
+			}
+		});
+
+		Map<SwitchingTime, Device> result = new LinkedHashMap<SwitchingTime, Device>();
+		for (Map.Entry<SwitchingTime, Device> entry : list) {
+			result.put(entry.getKey(), entry.getValue());
+		}
+		this.solution=result;
+
 	}
 
 }

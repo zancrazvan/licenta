@@ -9,7 +9,7 @@ import java.util.TreeMap;
 
 import org.hsqldb.lib.HashMap;
 
-import com.knapsack.SwitchingTime;
+import com.licenta.entity.SwitchingTime;
 import com.licenta.entity.TimeSlot;
 import com.licenta.mockObject.TimeSeriesBit;
 

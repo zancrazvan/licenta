@@ -1,10 +1,17 @@
-package com.knapsack;
+package com.licenta.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Device implements Comparable<Device> {
 
+	@Id
 	private int id;
 	private int power;
 	private boolean alwaysOn;
+	
+	private String picturePath;
 
 	private String name;
 
@@ -55,6 +62,14 @@ public class Device implements Comparable<Device> {
 		Integer i1 = this.id;
 		Integer i2 = o.getId();
 		return i1.compareTo(i2);
+	}
+
+	public String getPicturePath() {
+		return picturePath;
+	}
+
+	public void setPicturePath(String picturePath) {
+		this.picturePath = picturePath;
 	}
 
 }

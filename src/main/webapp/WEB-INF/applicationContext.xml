@@ -29,7 +29,9 @@
 	<beans profile="prod">
 		<import resource="database-prod.xml" />
 	</beans>
-
+ <beans profile="ghi">
+		<import resource="database-ghi.xml" />
+	</beans>
 
 
 </beans>

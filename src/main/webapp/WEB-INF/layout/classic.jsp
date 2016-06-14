@@ -327,7 +327,10 @@
 				</ul></li>
 
 			<li class="active"><a href="/dissagregationDemo"> <i
-					class="fa fa-key"></i> <span>Exemplu dezagregare</span></a></li>
+					class="fa fa-key"></i> <span>Dezagregare</span></a></li>
+			<li class="active"><a href="/dissagregationLoadTests"> <i
+					class="fa fa-dashboard"></i> <span>Load Test Algoritm Dezagregare</span></a></li>
+
 
 
 

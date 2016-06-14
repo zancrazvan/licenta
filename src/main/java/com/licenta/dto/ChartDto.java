@@ -2,8 +2,8 @@ package com.licenta.dto;
 
 import java.util.List;
 
-import com.knapsack.Device;
-import com.knapsack.SwitchingTime;
+import com.licenta.entity.Device;
+import com.licenta.entity.SwitchingTime;
 import com.licenta.entity.TimeSlot;
 
 public class ChartDto {

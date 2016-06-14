@@ -3,6 +3,8 @@ package com.knapsack;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.licenta.entity.Device;
+
 public class DeviceGenerator {
 
 	public static List<Device> generateDevices(){

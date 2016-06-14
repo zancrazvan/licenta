@@ -37,6 +37,9 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
+		<!-- http://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		
+
 
 		<!-- spring dependencies -->
 		<dependency>
