@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.licenta.entity.User;
+import com.licenta.enumeration.Role;
 import com.licenta.repository.UserRepository;
 
 @Service
@@ -20,7 +21,11 @@ public class DBService {
 	public void init() {
 
 		User user = new User();
-		user.setEmail("email");
+		user.setEmail("razvan@licenta.com");
+		user.setPassword("licenta");
+		user.setFirstName("Razvan");
+		user.setLastName("Zanc");
+		user.setRole(Role.USER);
 
 		userRepository.save(user);
 
