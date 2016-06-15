@@ -48,7 +48,7 @@ public class TimeSlotGenerator {
 
 			int runningTime = Randomizer.generate(15, 15);
 			int start = devicesWithStartingTimes.get(d);
-			System.out.println(d.getName() + " " + runningTime);
+		//	System.out.println(d.getName() + " " + runningTime);
 			for (int i = 0; i < runningTime; i++) {
 				int crt = times[i + start].getPower();
 				times[i + start].setPower(crt + d.getPower());
