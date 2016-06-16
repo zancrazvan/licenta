@@ -3,6 +3,9 @@ package com.licenta.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.binpacking.bin.Bin;
@@ -13,15 +16,42 @@ import com.binpacking.generation.GenerationDAO;
 import com.binpacking.generation.GenerationFitness;
 import com.binpacking.util.DeviceGenerator;
 import com.binpacking.util.FileHandler;
+import com.licenta.entity.DeviceDTO;
+import com.licenta.repository.RazvanDTORepository;
 
 @Service
+@Transactional
 public class OptimizationService {
 
-	public List<Generation> binPackingOptimization(int nrOfIndividuals, int nrOfGenerations, List<Bin> bins) {
+	@Autowired
+	private RazvanDTORepository dtoRepository;
 
+	public List<Generation> binPackingOptimization(int nrOfIndividuals, int nrOfGenerations, List<Bin> bins) {
+		System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 		DeviceGenerator deviceGenerator = new DeviceGenerator();
 		List<Element> list = new ArrayList<>();
-		list = deviceGenerator.generateDevices();
+		// list = deviceGenerator.generateDevices();
+
+		List<DeviceDTO> deviceDTOs = new ArrayList<>();
+		deviceDTOs = dtoRepository.findAll().get(0).getDevices();
+
+		int nr = 0;
+		for (int i = 0; i < deviceDTOs.size(); i++) {
+			Element element = new Element();
+			element.setId(nr);
+			element.setValue(deviceDTOs.get(i).getPutere());
+			nr++;
+			list.add(element);
+
+			for (int j = 0; j < deviceDTOs.get(i).getNumarBeanuri(); j++) {
+				Element element2 = new Element();
+				element2.setId(nr);
+				element2.setValue(deviceDTOs.get(i).getPutere());
+				nr++;
+				list.add(element2);
+
+			}
+		}
 
 		GenerationFitness generationFitness = new GenerationFitness();
 		List<Generation> generations = new ArrayList<>();
