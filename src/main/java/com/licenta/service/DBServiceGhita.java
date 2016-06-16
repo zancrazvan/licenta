@@ -43,29 +43,17 @@ public class DBServiceGhita {
 	private RazvanDTOService razvanDTOService;
 	@Autowired
 	private RazvanDTORepository razvanDTORepository;
-
+	@Autowired
+	private DissagregationLoadTestService loadTestService;
+	
 	@PostConstruct
 	public void init() {
-		deviceGenerator.populateDB();
-
-		List<Device> devices = deviceRepository.findAll();
-
-		List<TimeSlot> slots = TimeSlotGenerator.generateRandomDevices(
-				DeviceGenerator.generateDevicesWithStartingTimes(), 120);
 		 
-		SwitchingTimeExtractor t = new SwitchingTimeExtractor();
-		List<SwitchingTime> sws = t.extractSwitchingTimes(slots);
-
-		Chromosome best = null;
-		Chromosome c1 = GeneticAlgorithm.geneticSolution(devices, sws, 2000,
-				100, 50);
-		
-		razvanDTOService.convertDissagregationSolutionToOprimizationImputs(c1);
-		
-		for(DeviceDTO d: razvanDTORepository.findAll().get(0).getDevices()){
-			System.out.println(d.toString());
-		}
-		
+		//loadTestService.incrementNumberOfDevices(50, 5000, 50);
+		//loadTestService.incrementNumberOfSwitchingTimes(5, 995, 5);
+		//loadTestService.incrementGenerations(50, 1000, 50);
+		//loadTestService.incrementPopulationSize(100, 10000, 100);
+		System.out.println("end");
 		
 	}
 
