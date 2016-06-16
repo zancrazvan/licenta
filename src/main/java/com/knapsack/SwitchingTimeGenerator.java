@@ -26,4 +26,13 @@ public class SwitchingTimeGenerator {
 
 		return sws;
 	}
+	public static List<SwitchingTime> generateSwitchingTimes(int number) {
+		List<SwitchingTime> sws = new ArrayList<>();
+		 
+		for (int i = 0; i < number; i++) {
+			sws.add(new SwitchingTime(i, i * 7, 7, 3));
+		}
+
+		return sws;
+	}
 }
