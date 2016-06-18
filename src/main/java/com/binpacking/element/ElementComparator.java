@@ -11,7 +11,7 @@ public class ElementComparator {
 			return 1;
 		}
 
-		if (firstElement.getId() == secondElement.getId()) {
+		if (firstElement.getId() == secondElement.getId() && firstElement.getName().equals(secondElement.getName())) {
 			return 0;
 		}
 

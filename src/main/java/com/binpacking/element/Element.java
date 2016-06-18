@@ -6,6 +6,8 @@ public class Element implements Comparable<Element> {
 
 	private double value;
 
+	private String name;
+
 	public int getId() {
 		return id;
 	}
@@ -20,6 +22,14 @@ public class Element implements Comparable<Element> {
 
 	public void setValue(double value) {
 		this.value = value;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
