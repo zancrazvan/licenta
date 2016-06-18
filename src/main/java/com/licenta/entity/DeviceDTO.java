@@ -15,12 +15,14 @@ public class DeviceDTO {
 	private int putere;
 	private String pathPoza;
 	private int numarBeanuri;
+	private String nume;
 
 	public void createDTO(Device d, SwitchingTime s) {
 		this.idOriginal = d.getId();
 		this.putere = d.getPower();
 		this.pathPoza = d.getPicturePath();
 		this.numarBeanuri = s.getRunningTime();
+		this.nume = d.getName();
 	}
 
 	public int getId() {
@@ -68,6 +70,14 @@ public class DeviceDTO {
 		return "DeviceDTO [id=" + id + ", idOriginal=" + idOriginal
 				+ ", putere=" + putere + ", pathPoza=" + pathPoza
 				+ ", numarBeanuri=" + numarBeanuri + "]";
+	}
+
+	public String getNume() {
+		return nume;
+	}
+
+	public void setNume(String nume) {
+		this.nume = nume;
 	}
 	
 
