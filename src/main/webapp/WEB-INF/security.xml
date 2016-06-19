@@ -8,11 +8,12 @@
 
 	<http use-expressions="true">
 		<intercept-url pattern="/" access="hasAnyRole('ADMIN', 'USER')" />
-
+		<intercept-url pattern="/register" access="permitAll"/>
 		<form-login login-page="/login" authentication-failure-url="/login?failed=true" />
 		<logout logout-url="/logout" />
 
 	</http>
+
 
 	<beans:bean id="daoAuthenticationProvider"
 		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">

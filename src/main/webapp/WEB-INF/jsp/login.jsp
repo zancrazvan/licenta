@@ -24,6 +24,7 @@
 					<div class="col-xs-4">
 						<button type="submit" name="login"
 							class="btn btn-primary btn-block btn-flat">Sign In</button>
+						<a href="/register"> Register here</a>
 					</div>
 					<!-- /.col -->
 				</div>
