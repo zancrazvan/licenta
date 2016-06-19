@@ -79,6 +79,6 @@
 
 </head>
 <body>
-	<div id="curve_chart" style="width: 100%; height: 500px"></div>
+	<!-- <div id="curve_chart" style="width: 100%; height: 500px"></div> -->
 	<div id="curve_chart2" style="width: 100%; height: 500px"></div>
 </body>

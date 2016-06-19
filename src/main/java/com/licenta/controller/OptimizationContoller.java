@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder.In;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,13 +38,14 @@ public class OptimizationContoller {
 	@RequestMapping(value = "/optimizationData", method = RequestMethod.POST)
 	public String postOptimizationData(Model model,
 			@RequestParam(value = "nrOfGenerations", required = false) String nrOfGenerations,
-			@RequestParam(value = "nrOfIndividuals", required = false) String nrOfIndividuals) {
+			@RequestParam(value = "nrOfIndividuals", required = false) String nrOfIndividuals,
+			@RequestParam(value = "curveType", required = false) String curveType) {
 
 		GenerationDAO generationDAO = new GenerationDAO();
 		BinDAO binDAO = new BinDAO();
 
 		DSOCurveGenerator curveGenerator = new DSOCurveGenerator();
-		List<Bin> bins = curveGenerator.generateBinCurve();
+		List<Bin> bins = curveGenerator.generateBinCurve(Integer.parseInt(curveType));
 
 		List<Generation> generatios = optimizationService.binPackingOptimization(Integer.parseInt(nrOfIndividuals),
 				Integer.parseInt(nrOfGenerations), bins);
@@ -78,8 +81,6 @@ public class OptimizationContoller {
 		}
 
 		model.addAttribute("dso", dso);
-
-		System.out.println(dso.size() + " " + solution.size()); 
 
 		return "optimizationGraph";
 	}

@@ -36,6 +36,15 @@
 										placeholder="Number of generations">
 								</div>
 
+								<div class="form-group">
+									<label>DSO Curve Type</label> <select class="form-control"
+										name="curveType">
+										<option value="0">Schedule Sevice 1</option>
+										<option value="1">Schedule Sevice 2</option>
+										<option value="2">Load Following</option>
+									</select>
+								</div>
+
 
 								<div class="box-footer">
 									<button type="submit" class="btn btn-primary">Submit</button>

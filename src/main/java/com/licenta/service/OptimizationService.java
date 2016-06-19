@@ -27,7 +27,7 @@ public class OptimizationService {
 	private RazvanDTORepository dtoRepository;
 
 	public List<Generation> binPackingOptimization(int nrOfIndividuals, int nrOfGenerations, List<Bin> bins) {
-		System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
+
 		DeviceGenerator deviceGenerator = new DeviceGenerator();
 		List<Element> list = new ArrayList<>();
 		// list = deviceGenerator.generateDevices();
