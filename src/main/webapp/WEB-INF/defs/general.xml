@@ -43,5 +43,9 @@
 	<definition name="login" extends="nothing">
 		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
 	</definition>
+	
+	<definition name="register" extends="nothing">
+		<put-attribute name="body" value="/WEB-INF/jsp/register.jsp" />
+	</definition>
 
 </tiles-definitions>
