@@ -21,7 +21,7 @@ public class DeviceGenerator {
 		List<Device> devices = new ArrayList<Device>();
 
 		Device d = new Device(1, 250, false);
-		d.setName("bec");
+		d.setName("bec 1");
 		devices.add(d);
 
 		d = new Device(2, 750, false);
@@ -53,7 +53,12 @@ public class DeviceGenerator {
 
 		i++;
 		d = new Device(i, 60, false);
-		d.setName("bec");
+		d.setName("bec 2");
+		devices.add(d);
+
+		i++;
+		d = new Device(i, 75, false);
+		d.setName("bec 3");
 		devices.add(d);
 
 		return devices;
@@ -74,7 +79,7 @@ public class DeviceGenerator {
 		List<Device> devices = new ArrayList<Device>();
 
 		Device d = new Device(1, 250, false);
-		d.setName("bec");
+		d.setName("bec 1");
 		d.setPicturePath("resources/devicePictures/bec.jpg");
 		devices.add(d);
 
@@ -113,24 +118,31 @@ public class DeviceGenerator {
 
 		i++;
 		d = new Device(i, 60, false);
-		d.setName("bec");
+		d.setName("bec 2");
 		d.setPicturePath("resources/devicePictures/bec.jpg");
 		devices.add(d);
+
+		i++;
+		d = new Device(i, 75, false);
+		d.setName("bec 3");
+		d.setPicturePath("resources/devicePictures/bec.jpg");
+		devices.add(d);
+
 		i++;
 		d = new Device(i, 24, false);
 		d.setName("neon");
- 
+
 		devices.add(d);
 		if (deviceRepository.findAll().size() != 0) {
-		List<Device> dd = deviceRepository.findAll();
-		for(Device dev:dd){
-			deviceRepository.delete(dev);
-		}
-		
-		}
-			for (Device device : devices) {
-				deviceRepository.save(device);
+			List<Device> dd = deviceRepository.findAll();
+			for (Device dev : dd) {
+				deviceRepository.delete(dev);
 			}
-		
+
+		}
+		for (Device device : devices) {
+			deviceRepository.save(device);
+		}
+
 	}
 }

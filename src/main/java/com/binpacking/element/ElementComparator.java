@@ -11,7 +11,20 @@ public class ElementComparator {
 			return 1;
 		}
 
-		if (firstElement.getId() == secondElement.getId() && firstElement.getName().equals(secondElement.getName())) {
+		if (firstElement.getName() != null || secondElement.getName() != null) {
+			if (firstElement.getId() == secondElement.getId()
+					&& firstElement.getName().equals(secondElement.getName())) {
+				return 0;
+			}
+		}
+
+		if (firstElement.getName() != null || secondElement.getName() != null) {
+			if (firstElement.getName().equals(secondElement.getName())) {
+				return 0;
+			}
+		}
+
+		if (firstElement.getId() == secondElement.getId()) {
 			return 0;
 		}
 

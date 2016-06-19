@@ -48,7 +48,8 @@ public class ChromosomeDAO {
 				elements2.add(element);
 				test.setElements(elements2);
 
-				if ((binDAO.getFilled(test) <= bin.getCapacity() - binDAO.getFilled(bin)) && added == false) {
+				if ((binDAO.getFilled(test) <= bin.getCapacity() - binDAO.getFilled(bin)) && added == false
+						&& !bin.getElements().contains(elements2) && !existsInBin(bin, element)) {
 
 					bin.getElements().add(element);
 					added = true;
@@ -75,7 +76,8 @@ public class ChromosomeDAO {
 				elements2.add(element);
 				test.setElements(elements2);
 
-				if ((binDAO.getFilled(test) <= bin.getCapacity() - binDAO.getFilled(bin)) && added == false) {
+				if ((binDAO.getFilled(test) <= bin.getCapacity() - binDAO.getFilled(bin)) && added == false
+						&& !bin.getElements().contains(elements2) && !existsInBin(bin, element)) {
 
 					bin.getElements().add(element);
 					added = true;
@@ -289,6 +291,19 @@ public class ChromosomeDAO {
 			for (Element element2 : bin.getElements()) {
 				if (element2.getId() == element.getId() && element2.getValue() == element.getValue()) {
 
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public boolean existsInBin(Bin bin, Element element) {
+
+		for (Element element2 : bin.getElements()) {
+
+			if (element.getName() != null || element2.getName() != null) {
+				if (element2.getName().equals(element.getName())) {
 					return true;
 				}
 			}

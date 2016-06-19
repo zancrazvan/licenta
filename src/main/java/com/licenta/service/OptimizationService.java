@@ -40,6 +40,7 @@ public class OptimizationService {
 			Element element = new Element();
 			element.setId(nr);
 			element.setValue(deviceDTOs.get(i).getPutere());
+			element.setName(deviceDTOs.get(i).getNume());
 			nr++;
 			list.add(element);
 
@@ -47,6 +48,7 @@ public class OptimizationService {
 				Element element2 = new Element();
 				element2.setId(nr);
 				element2.setValue(deviceDTOs.get(i).getPutere());
+				element2.setName(deviceDTOs.get(i).getNume()); 
 				nr++;
 				list.add(element2);
 

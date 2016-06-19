@@ -45,7 +45,7 @@ public class Generation implements Comparable<Generation> {
 				for (Element element : bin.getElements()) {
 
 					nrOfElem++;
-					string = string + (int) element.getValue() + " ";
+					string = string + (int) element.getValue() + "->" + element.getName();
 				}
 				string = string /* + ":" + (int) bin.getCapacity() */ + "]";
 			}
