@@ -81,6 +81,8 @@ public class OptimizationContoller {
 		}
 
 		model.addAttribute("dso", dso);
+		model.addAttribute("bestChromosom", chromosome);
+		System.out.println(chromosome.getId()); 
 
 		return "optimizationGraph";
 	}
